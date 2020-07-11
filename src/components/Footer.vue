@@ -15,6 +15,7 @@
 </template>
 <style lang="scss">
 .footer {
+  width: 100%;
   display: flex;
   justify-content: center;
   &__wrapper {
@@ -22,8 +23,10 @@
     width: 100%;
     bottom: 0;
     font-size: 1.4rem;
+    font-family: "SF Display";
+    font-weight: 500;
     color: $tertiary-color;
-    padding: 0 5rem 3rem;
+    padding: 0 3rem 3rem;
     @include screen(mid) {
       display: flex;
       justify-content: space-between;
@@ -36,25 +39,27 @@
       padding: 0 24rem 4rem;
     }
     &-info {
+      @include screen(mid) {
+        display: flex;
+        justify-content: flex-end;
+      }
       & > li:last-child {
-        @include screen(mid) {
-          margin-top: 0.7rem;
-        }
       }
       & > li:first-child {
+        @include screen(midder) {
+          margin-right: 3rem;
+        }
         @include screen(medder) {
           margin-right: 3rem;
         }
       }
       @include screen(medder) {
+        margin-right: 3rem;
         display: flex;
         align-items: center;
       }
     }
     &-copyright {
-      @include screen(mid) {
-        margin-bottom: 2rem;
-      }
     }
   }
 }

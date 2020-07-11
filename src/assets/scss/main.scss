@@ -22,6 +22,11 @@
         url('~@/assets/fonts/2b2a06b.ttf') format("truetype");
     text-rendering: optimizeLegibility;
 }
+@font-face {
+  font-family: "SF Display";
+  font-weight: 500;
+  src: url("https://sf.abarba.me/SF-UI-Display-Medium.otf");
+}
 
 //layout
 @import 'layout/reset';
@@ -54,7 +59,6 @@ body {
     height: 100%;
     overflow: auto;
 }
-
 .hidden {
     display: none;
 }

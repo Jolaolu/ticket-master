@@ -2,7 +2,7 @@
   <div class="event__card">
     <figure class="event__card-image">
       <div v-if="'loading'"></div>
-      <img class="event__card-image-item" :src="article.image" alt="" srcset="">
+      <img class="event__card-image-item" :src="article.image" :alt="`${article.name} event`">
     </figure>
     <p class="event__card-date">{{article.date}}</p>
     <h3 class="event__card-name">{{article.name}}</h3>
@@ -23,6 +23,9 @@ export default {
     &-date{
       font-size: 1.2rem;
       line-height: 1.4rem;
+      font-family: "SF Display";
+      font-weight: 500;
+      color: $secondary-color;
     }
     &-name{
       font-size: 1.8rem;
@@ -34,7 +37,8 @@ export default {
       font-size: 1.4rem;
       line-height: 1.7rem;
       letter-spacing: 0.05rem;
-       margin-top: 0.5rem;
+      margin-top: 0.5rem;
+      color: $secondary-color;
     }
   }
 </style>

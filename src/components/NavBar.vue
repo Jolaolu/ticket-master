@@ -3,13 +3,17 @@
     <div class="header__wrapper">
       <div class="header">
         <div class="header__logo">
-          <router-link to="/">
+          <router-link rolw="link" to="/">
             <svg
+            id="flutterwave"
+            aria-labelledby="logo"
+            role="img"
               width="173"
               height="34"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
+             <title id="logo">Flutterwave, Africa payments </title>
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -25,7 +29,7 @@
             </svg>
           </router-link>
         </div>
-        <nav class="header__menu">
+        <nav class="header__menu" role="navigation">
           <div class="header__menu-icons">
             <span
               @click="hamburger = true"
@@ -68,6 +72,7 @@
       <ul
         class="header__menu-options"
         id="menu"
+        role="navigation"
         :class="[hamburger ? '' : 'hidden']"
       >
         <li class="header__menu-option">
@@ -80,6 +85,10 @@
         </li>
       </ul>
     </div>
+    <!--
+      TODO:
+      fix  mobile navbar color and look, looks weird
+     -->
   </header>
 </template>
 <script>
@@ -93,6 +102,7 @@ export default {
 </script>
 <style lang="scss">
 .header__wrapper-container{
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -185,9 +195,3 @@ export default {
   }
 }
 </style>
-.header { display: flex; justify-content: space-between; align-items: center;
-padding: 1.5rem 8.3rem 0 ; &__menu { display: flex; align-items: center;
-&-option { margin-right: 2.4rem; line-height: 1.063rem; letter-spacing:
-0.508366px; font-weight: bold; color: $text-color; } &-button { @include button;
-line-height: 0.938rem; padding: 0.66rem 1.188rem; letter-spacing: 0.508366px;
-font-weight: bold; font-size: 0.75rem; } } }

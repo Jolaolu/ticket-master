@@ -1,10 +1,11 @@
 <template>
   <div class="home">
-    <main class="event__page">
-      <h1 class="event__page-hero">The best events happening now.</h1>
-      <section id="events-list" class="event__page-listing">
-        <article v-for="(article, index) in articles" :key="index" class="event__page-listing-item">
-          <router-link to="/">
+    <NavBar/>
+    <main class="events__page">
+      <h1 class="events__page-hero">The best events happening now.</h1>
+      <section id="events-list" class="events__page-listing">
+        <article v-for="(article, index) in articles" :key="index" class="events__page-listing-item">
+          <router-link role="link" :to="{name: 'EventDetailsView', params:{ id: article.id, article:article }}">
             <EventCard :article="article" />
           </router-link>
         </article>
@@ -13,6 +14,7 @@
          -->
       </section>
     </main>
+    <Footer/>
   </div>
 </template>
 
@@ -28,36 +30,42 @@ export default {
     return {
       articles: [
         {
+          id: 1,
           date: '8th February 2019',
           name: 'The Nathan Cole Experience',
           price: 'N5000 – N2,000,000',
           image: image
         },
         {
+          id: 2,
           date: '8th February 2019',
           name: 'The Nathan Cole Experience',
           price: 'N5000 – N2,000,000',
           image: image
         },
         {
+          id: 3,
           date: '8th February 2019',
           name: 'The Nathan Cole Experience',
           price: 'N5000 – N2,000,000',
           image: image
         },
         {
+          id: 4,
           date: '8th February 2019',
           name: 'The Nathan Cole Experience',
           price: 'N5000 – N2,000,000',
           image: image
         },
         {
+          id: 5,
           date: '8th February 2019',
           name: 'The Nathan Cole Experience',
           price: 'N5000 – N2,000,000',
           image: image
         },
         {
+          id: 6,
           date: '8th February 2019',
           name: 'The Nathan Cole Experience',
           price: 'N5000 – N2,000,000',
@@ -71,9 +79,10 @@ export default {
 <style lang="scss">
 .home{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
-.event__page {
+.events__page {
   max-width: 1440px;
   padding-top: 7.56rem;
   padding-left: 3rem;
@@ -85,18 +94,21 @@ export default {
   }
   &-hero {
     font-weight: 900;
-    font-size: 3.6rem;
-    line-height: 4rem;
     margin-bottom: 2.5rem;
-    @include screen (large){
+    font-size: 2rem;
+    @include screen (menner){
+      line-height: 4rem;
+      font-size: 3.6rem;
+    }
+    @include screen (medder){
       margin-left: 3.3rem;
     }
   }
   &-listing {
     @include screen (mid) {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
     }
     @include screen (midder){
       display: flex;
@@ -105,7 +117,6 @@ export default {
       width: 100%;
     }
     @include screen (large){
-
       width: 100%;
       display: grid;
       grid-template-columns: 31% 31% 31%;
@@ -118,19 +129,13 @@ export default {
       flex-wrap: wrap;
     }
     &-item{
-      &:nth-child(even){
-        @include screen(midder){
-          margin-left: 2rem;
-        }
+      @include screen(small){
+        width: 100%;
       }
-      @include screen (large){
+      @include screen (midder){
+        width: 35rem;
       }
     }
-
-    /* @include screen (large){
-      display: grid;
-      grid-template-columns: 29% 29% 29%;
-    } */
   }
 }
 </style>

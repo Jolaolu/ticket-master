@@ -1,7 +1,6 @@
 export default {
   data: function () {
     return {
-      passwordFieldType: 'password',
       notificationSystem: {
         options: {
           ballon: {

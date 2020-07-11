@@ -1,7 +1,7 @@
 /* MEDIA QUERIES ----------- */
 
-$breakpoint-smaller: 360px;
-$breakpoint-small: 420px;
+$breakpoint-small: 360px;
+$breakpoint-min: 420px;
 $breakpoint-mid: 768px;
 $breakpoint-med: 1024px;
 $breakpoint-large: 1280px;
@@ -10,15 +10,20 @@ $breakpoint-larger: 1440px;
 /* MIXINS FOR MEDIA QUERIES ----------- */
 
 @mixin screen($size, $type: max, $pixels: 600) {
-    @if $size=='smaller' {
-        @media screen and (max-width: $breakpoint-smaller) {
-            @content;
-        }
-    }
     @if $size=='small' {
         @media screen and (max-width: $breakpoint-small) {
             @content;
         }
+    }
+    @if $size=='min' {
+        @media screen and (max-width: $breakpoint-min) {
+            @content;
+        }
+    }
+    @else if $size=='menner' {
+        @media screen and (min-width: $breakpoint-mid){
+            @content;
+        }    
     }
     @if $size=='mid' {
         @media screen and (max-width: $breakpoint-mid) {
