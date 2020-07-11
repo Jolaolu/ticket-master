@@ -4,13 +4,13 @@
    ========================================================================== */
 
 /**
- * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
 html {
-  line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Sections
@@ -32,15 +32,6 @@ main {
   display: block;
 }
 
-/**
- * Correct the font size and margin on `h1` elements within `section` and
- * `article` contexts in Chrome, Firefox, and Safari.
- */
-
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
 
 /* Grouping content
    ========================================================================== */
@@ -223,14 +214,6 @@ button:-moz-focusring,
 }
 
 /**
- * Correct the padding in Firefox.
- */
-
-fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
-/**
  * 1. Correct the text wrapping in Edge and IE.
  * 2. Correct the color inheritance from `fieldset` elements in IE.
  * 3. Remove the padding so developers are not caught out when they zero out
@@ -347,3 +330,140 @@ template {
 [hidden] {
   display: none;
 }
+/* ***********************************
+ *
+ *    Ire's CSS Reset & Base
+ *
+ * *********************************** */
+
+/* Reset margin, padding, border
+ * *********************************** */
+
+ html, body,
+ h1, h2, h3, h4, h5, h6,
+ a, p, span,
+ em, small, strong,
+ sub, sup,
+ mark, del, ins, strike,
+ abbr, dfn,
+ blockquote, q, cite,
+ code, pre,
+ ol, ul, li, dl, dt, dd,
+ div, section, article,
+ main, aside, nav,
+ header, hgroup, footer,
+ img, figure, figcaption,
+ address, time,
+ audio, video,
+ canvas, iframe,
+ details, summary,
+ fieldset, form, label, legend,
+ table, caption,
+ tbody, tfoot, thead,
+ tr, th, td {
+     margin: 0;
+     padding: 0;
+     border: 0;
+ }
+ 
+ /* Typography
+  * *********************************** */
+ 
+ html {
+     font-size: 62.5%;
+ }
+ 
+ body {
+     font-size: 1.6rem;
+     line-height: 1.4;
+ }
+ 
+ * {
+     font-family: inherit;
+     font-size: inherit;
+     line-height: inherit;
+ }
+ 
+ a,
+ a:visited {
+     color: inherit;
+ }
+
+ a{
+     text-decoration: none;
+ }
+ 
+ /* Layout
+  * *********************************** */
+ 
+ article,
+ aside,
+ footer,
+ header,
+ nav,
+ section,
+ main {
+     display: block;
+ }
+ 
+ * {
+     box-sizing: border-box;
+ }
+ 
+ *:before,
+ *:after {
+     box-sizing: inherit;
+ }
+ 
+ /* Elements
+  * *********************************** */
+ 
+ table {
+     border-collapse: collapse;
+     border-spacing: 0;
+ }
+ 
+ ol,
+ ul {
+     list-style: none;
+ }
+ 
+ img,
+ video {
+     max-width: 100%;
+ }
+ 
+ 
+ blockquote,
+ q {
+     quotes: none;
+ }
+ 
+ blockquote:after,
+ blockquote:before,
+ q:after,
+ q:before {
+     content: "";
+     content: none;
+ }
+ 
+ /* Attributes & states
+  * *********************************** */
+ 
+ [disabled] {
+     cursor: not-allowed;
+ }
+ 
+ :focus:not(:focus-visible) {
+     outline: none;
+ }
+ 
+ /* Utility classes
+  * *********************************** */
+ 
+ .sr-only {
+     position: absolute;
+     clip: rect(1px, 1px, 1px, 1px);
+     left: -9999px;
+     top: -9999px;
+ }
