@@ -1,0 +1,43 @@
+@charset 'utf-8';
+
+@font-face {
+    font-family: Flutterwave;
+    font-weight: 400;
+    src: local("Flutterwave"),
+        url(../fonts/5da28fe.ttf) format("truetype");
+    text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: Flutterwave;
+  font-weight: 700;
+  font-style: normal;
+  src: local("Flutterwave"),
+    url(../fonts/8acb0e3.ttf) format("truetype");
+    text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: Flutterwave;
+  font-weight: 900;
+    src: local("Flutterwave"),
+        url(../fonts/2b2a06b.ttf) format("truetype");
+    text-rendering: optimizeLegibility;
+}
+
+//layout
+@import 'layout/reset';
+@import 'layout/variable';
+
+// //components
+// @import 'components/_header';
+// @import 'components/_search';
+// @import 'components/peoplecard';
+// @import 'components/buttons';
+// @import 'components/_starshipscard';
+// @import 'components/planetscard';
+// @import "components/_footer";
+
+// //pages
+// @import 'pages/home';
+// @import 'pages/starship';
+// @import 'pages/_person';
+// @import 'pages/_planet'
