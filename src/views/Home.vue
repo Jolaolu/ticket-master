@@ -69,16 +69,28 @@ export default {
 }
 </script>
 <style lang="scss">
+.home{
+  display: flex;
+  justify-content: center;
+}
 .event__page {
+  max-width: 1440px;
   padding-top: 7.56rem;
   padding-left: 3rem;
   padding-right: 3rem;
   padding-bottom: 8rem;
+  @include screen (large) {
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
   &-hero {
     font-weight: 900;
     font-size: 3.6rem;
     line-height: 4rem;
     margin-bottom: 2.5rem;
+    @include screen (large){
+      margin-left: 3.3rem;
+    }
   }
   &-listing {
     @include screen (mid) {
@@ -92,18 +104,33 @@ export default {
       flex-wrap: wrap;
       width: 100%;
     }
+    @include screen (large){
+
+      width: 100%;
+      display: grid;
+      grid-template-columns: 31% 31% 31%;
+      column-gap: 3%;
+      row-gap: 2%;
+    }
+    @include screen(larger){
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
     &-item{
       &:nth-child(even){
         @include screen(midder){
           margin-left: 2rem;
         }
       }
+      @include screen (large){
+      }
     }
 
-    @include screen (large){
+    /* @include screen (large){
       display: grid;
-      grid-template-columns: 30% 30% 30%;
-    }
+      grid-template-columns: 29% 29% 29%;
+    } */
   }
 }
 </style>
