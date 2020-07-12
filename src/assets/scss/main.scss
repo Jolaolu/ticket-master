@@ -23,6 +23,13 @@
     text-rendering: optimizeLegibility;
 }
 @font-face {
+  font-family: Flutterwave; 
+  font-style: italic;
+  src: local("Flutterwave"),
+    url('~@/assets/fonts/FLW-Italic.ttf') format("truetype");
+    text-rendering: optimizeLegibility;
+}
+@font-face {
   font-family: "SF Display";
   font-weight: 500;
   src: url("https://sf.abarba.me/SF-UI-Display-Medium.otf");
@@ -33,22 +40,8 @@
 @import 'layout/variable';
 
 //mixin
-@import 'utils/_mixins';
+@import 'utils/mixins';
 
-// //components
-// @import 'components/_navbar';
-// @import 'components/_search';
-// @import 'components/peoplecard';
-// @import 'components/buttons';
-// @import 'components/_starshipscard';
-// @import 'components/planetscard';
-// @import "components/_footer";
-
-// //pages
-// @import 'pages/home';
-// @import 'pages/starship';
-// @import 'pages/_person';
-// @import 'pages/_planet'
 
 html {
    height: 100%;

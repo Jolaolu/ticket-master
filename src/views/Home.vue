@@ -83,13 +83,14 @@ export default {
   align-items: center;
 }
 .events__page {
-   min-height: 100vh;
+  min-height: 100vh;
   max-width: 1440px;
   padding-top: 7.56rem;
   padding-left: 3rem;
   padding-right: 3rem;
   padding-bottom: 8rem;
   @include screen (large) {
+    min-height: 100%;
     padding-left: 10rem;
     padding-right: 10rem;
   }

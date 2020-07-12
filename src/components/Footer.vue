@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer__wrapper">
       <div class="footer__wrapper-copyright">
-        <router-link to="/">
+        <router-link to="/" class="footer__wrapper-copyright-link">
           Copyright 2019. Flutterwave inc
         </router-link>
       </div>
@@ -27,6 +27,7 @@
     font-weight: 500;
     color: $tertiary-color;
     padding: 0 3rem 3rem;
+    letter-spacing: 0.0028px;
     @include screen(medder) {
       display: flex;
       justify-content: space-between;
@@ -58,6 +59,9 @@
       }
     }
     &-copyright {
+      &-link{
+        color: $tertiary-color;
+      }
     }
   }
 }

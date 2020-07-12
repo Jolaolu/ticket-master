@@ -15,12 +15,12 @@
         <div class="event__details-content">
           <span class="event__details-date">{{ article.date }}</span>
           <h1 class="event__details-name">{{ article.name }}</h1>
-          <em class="event__details-description">
+          <p class="event__details-description">
             Two-Time Grammy Award winner, Nathaniel Cole, who’s also just
             released an album, Into The Wild, will be having his first concert
-            in Lagos, Nigeria! Fans have waited so long for this announcement,
+            in Lagos, Nigeria!<br/> Fans have waited so long for this announcement,
             and it promises to be everything anyone has imagined.
-          </em>
+          </p>
           <h3 class="event__details-price">{{ article.price }}</h3>
           <div class="event__details-cta">
             <button class="event__details-cta-item">
@@ -80,17 +80,17 @@
               SOCIAL LINKS
             </p>
             <p class="event__details-socials-link">
-              <router-link to="/">
+              <router-link to="/" class="social-link">
                 http://www.nathanielcole.com
               </router-link>
             </p>
             <p class="event__details-socials-link">
-              <router-link to="/">
+              <router-link to="/"  class="social-link">
                 http://www.nathanielcole.com
               </router-link>
             </p>
             <p class="event__details-socials-link">
-              <router-link to="/">
+              <router-link to="/"  class="social-link">
                 http://www.nathanielcole.com
               </router-link>
             </p>
@@ -154,12 +154,15 @@ export default {
       @include screen(menner) {
         height: 430px;
         object-fit: cover;
+        border-radius: 6px;
+      }
+      @include screen (larger){
       }
     }
     &-image-wrapper {
       flex-grow: 1;
       @include screen(menner) {
-        width: 50%;
+        width: 48%;
       }
     }
     &-content {
@@ -181,6 +184,7 @@ export default {
     }
     &-name {
       color: $sub-color;
+      font-weight: 900;
       margin-bottom: 1.4rem;
       margin-top: 1rem;
       font-size: 2.2rem;
@@ -188,17 +192,24 @@ export default {
         font-size: 3.6rem;
         line-height: 4rem;
       }
+      @include screen (larger){
+        width: 28rem;
+      }
     }
     &-description {
       font-family: $font-primary;
+      color: $tertiary-color;
+      font-style: italic;
       @include screen (menner){
         font-size: 1.8rem;
         line-height: 2.8rem;
+        width: 95%;
       }
     }
     &-price {
       margin-top: 1.4rem;
       font-size: 1.8rem;
+      color: $text-color;
       @include screen(menner) {
         font-size: 2.4rem;
         margin-top: 2.9rem;
@@ -215,14 +226,14 @@ export default {
       &-item {
         @include button;
         font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
         letter-spacing: 0.05rem;
         text-transform: uppercase;
         border: 1px solid transparent;
         margin-top: 2rem;
         font-size: 1.4rem;
-        /* @include screen(mid) { */
         padding: 1.2rem 5rem;
-        /* } */
         @include screen(menner) {
           padding: 1.8rem 12rem;
         }
@@ -235,6 +246,7 @@ export default {
         font-weight: 500;
         line-height: 2.4rem;
         text-transform: uppercase;
+        color: $text-color;
         @include screen(menner) {
           font-size: 1.8rem;
         }
@@ -268,6 +280,7 @@ export default {
       }
     }
     &-misc {
+       margin-top: 1.8rem;
       @include screen (menner){
         width: 50%
       }
@@ -309,6 +322,7 @@ export default {
     }
     &-socials {
       &-link {
+        color: $sub-color;
         margin-bottom: 1rem;
         line-height: 2rem;
         @include screen (menner){
@@ -325,6 +339,9 @@ export default {
           padding-top: 5rem;
       }
     }
+  }
+  .social-link{
+    color: $sub-color;
   }
 }
 </style>

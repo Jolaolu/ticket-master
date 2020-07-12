@@ -16,9 +16,14 @@ export default {
 </script>
 <style lang="scss">
   .event__card{
+    cursor: pointer;
     margin-bottom: 3rem;
     &-image{
       margin-bottom: 1.9rem;
+      &-item{
+        /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.306764); */
+        border-radius: 6px;
+      }
     }
     &-date{
       font-size: 1.2rem;
@@ -32,6 +37,7 @@ export default {
       font-weight: bold;
       line-height: 2.2rem;
       margin-top: 0.5rem;
+      color: $text-color;
     }
     &-price{
       font-size: 1.4rem;

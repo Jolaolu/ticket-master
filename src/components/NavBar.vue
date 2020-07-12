@@ -187,6 +187,8 @@ export default {
     }
     &-button {
       @include button;
+      cursor: pointer;
+      box-shadow: 0px 1.01673px 1.01673px rgba(0, 0, 0, 0.5);
       line-height: 1.5rem;
       padding: 0.66rem 1.188rem;
       letter-spacing: 0.508366px;
