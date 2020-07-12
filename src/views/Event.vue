@@ -21,22 +21,25 @@
             in Lagos, Nigeria! Fans have waited so long for this announcement,
             and it promises to be everything anyone has imagined.
           </em>
-          <h3 class="event__details-price">{{article.price}}</h3>
-          <button class="event__details-cta">
-            Buy Ticket
-          </button>
+          <h3 class="event__details-price">{{ article.price }}</h3>
+          <div class="event__details-cta">
+            <button class="event__details-cta-item">
+              Buy Ticket
+            </button>
+          </div>
         </div>
       </section>
-      <section>
-        <div></div>
-        <div>
-          <label for="address">
-            Venue
-          </label>
-          <address>
-            Eko Atlantic Beach, Off Ahmadu Bello way, Victoria Island, Lagos.
-          </address>
-          <div>
+      <section class="event__details-others">
+        <div class="event__details-address-wrapper">
+          <div class="event__details-address">
+            <span>
+              Venue
+            </span>
+            <p>
+              Eko Atlantic Beach, Off Ahmadu<br/> Bello way, Victoria Island,<br/> Lagos.
+            </p>
+          </div>
+          <div class="event__details-map">
             <span>
               <svg
                 width="18"
@@ -65,6 +68,34 @@
             <p>View map for directions</p>
           </div>
         </div>
+        <div class="event__details-misc">
+          <div class="event__details-startdate-wrapper">
+            <p class="event__details-startdate-label">DATE AND TIME</p>
+            <p class="event__details-startdate">
+              Friday, February 8th 2019, 10:00pm
+            </p>
+          </div>
+          <div class="event__details-socials">
+            <p class="event__details-socials-label">
+              SOCIAL LINKS
+            </p>
+            <p class="event__details-socials-link">
+              <router-link to="/">
+                http://www.nathanielcole.com
+              </router-link>
+            </p>
+            <p class="event__details-socials-link">
+              <router-link to="/">
+                http://www.nathanielcole.com
+              </router-link>
+            </p>
+            <p class="event__details-socials-link">
+              <router-link to="/">
+                http://www.nathanielcole.com
+              </router-link>
+            </p>
+          </div>
+        </div>
       </section>
     </main>
     <Footer />
@@ -81,47 +112,59 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
   min-height: 100vh;
   background-image: url("~@/assets/images/Lines.png");
   background-repeat: no-repeat;
-  @include screen (mid){
-      background-size: cover;
+  @include screen(med) {
+    background-size: cover;
   }
-  @include screen (menner) {
-    background-size: contain;
-    background-position: right;
+  @include screen(large) {
+    background-position:  bottom 5px right 7px;
   }
   &__details {
     max-width: 1440px;
-    @include screen(mid) {
-      padding-top: 5.8rem;
-      padding-left: 3rem;
-      padding-right: 3rem;
+    padding-top: 5.8rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 3rem;
+    @include screen(medder) {
+      padding-top: 8em;
+      padding-left: 15rem;
+      padding-right: 15rem;
+      padding-bottom: 16rem;
     }
-    @include screen(menner) {
+    @include screen(larger) {
       padding-top: 5.64em;
       padding-left: 25rem;
       padding-right: 25rem;
     }
     &-main {
-       display: flex;
+      display: flex;
       flex-direction: column;
       padding-bottom: 5rem;
-      border-bottom: 1px solid #CCB7B1;
+      border-bottom: 1px solid #ccb7b1;
+      margin-bottom: 2rem;
       @include screen(menner) {
+        padding-top: 4rem;
         flex-direction: row-reverse;
+        margin-bottom: 5rem;
+      }
+    }
+    &-image {
+      @include screen(menner) {
+        height: 430px;
+        object-fit: cover;
       }
     }
     &-image-wrapper {
       flex-grow: 1;
-      @include screen (menner) {
+      @include screen(menner) {
         width: 50%;
       }
     }
     &-content {
-       flex-grow: 1;
-      @include screen (menner) {
+      flex-grow: 1;
+      @include screen(menner) {
         width: 50%;
       }
     }
@@ -129,38 +172,158 @@ export default {
       color: $sub-color;
       font-family: "SF Display";
       font-weight: 500;
-      @include screen(mid) {
-        margin-top: .5rem;
-        font-size: 1.2rem;
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+      @include screen(menner) {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
       }
     }
     &-name {
       color: $sub-color;
       margin-bottom: 1.4rem;
-      @include screen(mid) {
-        margin-top: 1rem;
-        font-size: 2.2rem;
+      margin-top: 1rem;
+      font-size: 2.2rem;
+      @include screen (menner){
+        font-size: 3.6rem;
+        line-height: 4rem;
       }
     }
-    &-description{
+    &-description {
       font-family: $font-primary;
-    }
-    &-price{
-      font-size: 2.4rem;
-      margin-top: 1.4rem;
-      @include screen (medder){
-        margin-top: 2.9rem;
+      @include screen (menner){
+        font-size: 1.8rem;
+        line-height: 2.8rem;
       }
     }
-    &-cta{
-      @include button;
-      border: none;
+    &-price {
+      margin-top: 1.4rem;
+      font-size: 1.8rem;
+      @include screen(menner) {
+        font-size: 2.4rem;
+        margin-top: 2.9rem;
+        line-height: 2.8rem;
+      }
+    }
+    &-cta {
       width: 100%;
-      margin-top:2rem;
-      font-size: 1.4rem;
+      display: flex;
+      justify-content: center;
+      @include screen(menner) {
+        justify-content: start;
+      }
+      &-item {
+        @include button;
+        font-weight: bold;
+        letter-spacing: 0.05rem;
+        text-transform: uppercase;
+        border: 1px solid transparent;
+        margin-top: 2rem;
+        font-size: 1.4rem;
+        /* @include screen(mid) { */
+        padding: 1.2rem 5rem;
+        /* } */
+        @include screen(menner) {
+          padding: 1.8rem 12rem;
+        }
+      }
+    }
+    &-address {
+       margin-top: 1.8rem;
+      & > span {
+        font-family: "SF Display";
+        font-weight: 500;
+        line-height: 2.4rem;
+        text-transform: uppercase;
+        @include screen(menner) {
+          font-size: 1.8rem;
+        }
+      }
+      & > p {
+        line-height: 2rem;
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-top: 1.2rem;
+        @include screen(menner) {
+          font-size: 2.4rem;
+          margin-top: 1.9rem;
+          line-height: 3.2rem;
+        }
+      }
+    }
+    &-map {
+      display: flex;
+      color: $primary-color;
+      margin-top: 1.4rem;
+      @include screen(menner) {
+        margin-top: 2.1rem;
+      }
+      & > span {
+        margin-right: 1.6rem;
+      }
+      & > p{
+        @include screen(menner) {
+          line-height: 1.8rem;
+        }
+      }
+    }
+    &-misc {
+      @include screen (menner){
+        width: 50%
+      }
+    }
+    &-address-wrapper{
+      @include screen (menner){
+        width: 50%
+      }
+    }
+    &-startdate-label {
+      font-family: "SF Display";
+      font-weight: 500;
+      line-height: 1.6rem;
+      text-transform: uppercase;
+      @include screen(mid) {
+        margin-top: 1.8rem;
+      }
+      @include screen(menner) {
+        font-size: 1.8rem;
+      }
+    }
+    &-startdate {
+      line-height: 2rem;
+      font-size: 1.8rem;
       font-weight: bold;
-      letter-spacing: 0.05rem;
-      padding: 1.8rem 12rem;
+      margin-top: 1.2rem;
+      @include screen(menner) {
+        font-size: 2.4rem;
+        margin-top: 2.2rem;
+        line-height: 3.2rem;
+      }
+    }
+    &-socials-label {
+      font-family: "SF Display";
+      font-weight: 500;
+      line-height: 1.6rem;
+      margin-top: 1.6rem;
+      margin-bottom: 1.6rem;
+    }
+    &-socials {
+      &-link {
+        margin-bottom: 1rem;
+        line-height: 2rem;
+        @include screen (menner){
+          font-size: 1.8rem;
+        }
+      }
+    }
+    &-others{
+      padding-bottom: 3rem;
+      @include screen(menner){
+        display: flex;
+      }
+      @include screen (midder){
+          padding-top: 5rem;
+      }
     }
   }
 }

@@ -30,8 +30,6 @@
     @include screen(medder) {
       display: flex;
       justify-content: space-between;
-    }
-    @include screen(large) {
       padding: 0 24rem 4rem;
     }
     &-info {
@@ -42,17 +40,19 @@
         @include screen(mid) {
           margin-top: 2rem;
         }
+        @include screen (large){
+          /* margin-right: 5rem; */
+        }
       }
       & > li:first-child {
         @include screen(midder) {
           margin-right: 3rem;
         }
-        @include screen(medder) {
-          margin-right: 3rem;
+        @include screen(large) {
+          margin-right: 4.8rem;
         }
       }
       @include screen(medder) {
-        margin-right: 3rem;
         display: flex;
         align-items: center;
       }

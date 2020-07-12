@@ -113,9 +113,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  @include screen(large) {
-    padding: 2.4rem 13.3rem 0;
+     padding: 2.4rem 13.3rem 0;
   }
 }
 #menu {
