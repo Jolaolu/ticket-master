@@ -27,10 +27,6 @@
     font-weight: 500;
     color: $tertiary-color;
     padding: 0 3rem 3rem;
-    @include screen(mid) {
-      display: flex;
-      justify-content: space-between;
-    }
     @include screen(medder) {
       display: flex;
       justify-content: space-between;
@@ -40,10 +36,12 @@
     }
     &-info {
       @include screen(mid) {
-        display: flex;
-        justify-content: flex-end;
+        margin-top: 2rem;
       }
       & > li:last-child {
+        @include screen(mid) {
+          margin-top: 2rem;
+        }
       }
       & > li:first-child {
         @include screen(midder) {

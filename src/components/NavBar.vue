@@ -5,15 +5,15 @@
         <div class="header__logo">
           <router-link rolw="link" to="/">
             <svg
-            id="flutterwave"
-            aria-labelledby="logo"
-            role="img"
+              id="flutterwave"
+              aria-labelledby="logo"
+              role="img"
               width="173"
               height="34"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-             <title id="logo">Flutterwave, Africa payments </title>
+              <title id="logo">Flutterwave, Africa payments</title>
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -101,7 +101,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.header__wrapper-container{
+.header__wrapper-container {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -153,9 +153,18 @@ export default {
     &-options {
       color: $text-color;
       @include screen(mid) {
-        background: $white;
-        height: 15vh;
+        background: $background-color;
+        z-index: 1;
+        height: 90vh;
         width: 100%;
+        display: flex;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
         text-align: center;
         padding-top: 2rem;
       }
@@ -167,8 +176,8 @@ export default {
     &-option {
       &:first-child {
         @include screen(mid) {
-          margin-bottom: 1rem;
-          font-size: 1.4rem;
+          margin-bottom: 2rem;
+          font-size: 2rem;
         }
         @include screen(medder) {
           letter-spacing: 0.508366px;

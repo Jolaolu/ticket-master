@@ -83,6 +83,7 @@ export default {
   align-items: center;
 }
 .events__page {
+   min-height: 100vh;
   max-width: 1440px;
   padding-top: 7.56rem;
   padding-left: 3rem;
