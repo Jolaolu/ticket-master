@@ -1,33 +1,33 @@
 @charset 'utf-8';
 
 @font-face {
-    font-family: Flutterwave;
-    font-weight: 400;
-    src: local("Flutterwave"),
-        url('~@/assets/fonts/5da28fe.ttf') format("truetype");
-    text-rendering: optimizeLegibility;
+  font-family: Flutterwave;
+  font-weight: 400;
+  src: local("Flutterwave"),
+    url("~@/assets/fonts/5da28fe.ttf") format("truetype");
+  text-rendering: optimizeLegibility;
 }
 @font-face {
   font-family: Flutterwave;
   font-weight: 700;
   font-style: normal;
   src: local("Flutterwave"),
-    url('~@/assets/fonts/8acb0e3.ttf') format("truetype");
-    text-rendering: optimizeLegibility;
+    url("~@/assets/fonts/8acb0e3.ttf") format("truetype");
+  text-rendering: optimizeLegibility;
 }
 @font-face {
   font-family: Flutterwave;
   font-weight: 900;
-    src: local("Flutterwave"),
-        url('~@/assets/fonts/2b2a06b.ttf') format("truetype");
-    text-rendering: optimizeLegibility;
+  src: local("Flutterwave"),
+    url("~@/assets/fonts/2b2a06b.ttf") format("truetype");
+  text-rendering: optimizeLegibility;
 }
 @font-face {
-  font-family: Flutterwave; 
+  font-family: Flutterwave;
   font-style: italic;
   src: local("Flutterwave"),
-    url('~@/assets/fonts/FLW-Italic.ttf') format("truetype");
-    text-rendering: optimizeLegibility;
+    url("~@/assets/fonts/FLW-Italic.ttf") format("truetype");
+  text-rendering: optimizeLegibility;
 }
 @font-face {
   font-family: "SF Display";
@@ -36,23 +36,30 @@
 }
 
 //layout
-@import 'layout/reset';
-@import 'layout/variable';
+@import "layout/reset";
+@import "layout/variable";
 
 //mixin
-@import 'utils/mixins';
-
+@import "utils/mixins";
 
 html {
-   height: 100%;
-   overflow: hidden;
+  height: 100%;
+  overflow: hidden;
 }
 body {
-    background: $background-color;
-    height: 100%;
-    min-height: 100vh;
-    overflow: auto;
+  background: $background-color;
+  height: 100%;
+  min-height: 100vh;
+  overflow: auto;
 }
 .hidden {
-    display: none;
+  display: none;
+}
+a:hover {
+  opacity: 0.88;
+}
+button {
+  &:hover {
+    opacity: 0.88;
+  }
 }

@@ -10,55 +10,56 @@ $breakpoint-larger: 1440px;
 /* MIXINS FOR MEDIA QUERIES ----------- */
 
 @mixin screen($size, $type: max, $pixels: 600) {
-    @if $size=='small' {
-        @media screen and (max-width: $breakpoint-small) {
-            @content;
-        }
+  @if $size== "small" {
+    @media screen and (max-width: $breakpoint-small) {
+      @content;
     }
-    @if $size=='min' {
-        @media screen and (max-width: $breakpoint-min) {
-            @content;
-        }
+  }
+  @if $size== "min" {
+    @media screen and (max-width: $breakpoint-min) {
+      @content;
     }
-    @else if $size=='menner' {
-        @media screen and (min-width: $breakpoint-mid){
-            @content;
-        }    
+  } @else if $size== "menner" {
+    @media screen and (min-width: $breakpoint-mid) {
+      @content;
     }
-    @if $size=='mid' {
-        @media screen and (max-width: $breakpoint-mid) {
-            @content;
-        }
+  }
+  @if $size== "mid" {
+    @media screen and (max-width: $breakpoint-mid) {
+      @content;
     }
-    @else if $size=='midder' {
-        @media screen and (min-width: $breakpoint-mid) and (max-width: $breakpoint-med) {
-            @content;
-        }
+  } @else if $size== "midder" {
+    @media screen and (min-width: $breakpoint-mid) and (max-width: $breakpoint-med) {
+      @content;
     }
-    @else if $size=='med' {
-        @media screen and (max-width: $breakpoint-med) {
-            @content;
-        }
+  } @else if $size== "med" {
+    @media screen and (max-width: $breakpoint-med) {
+      @content;
     }
-    @else if $size=='medder' {
-        @media screen and (min-width: $breakpoint-med) {
-            @content;
-        }
+  } @else if $size== "medder" {
+    @media screen and (min-width: $breakpoint-med) {
+      @content;
     }
-    @else if $size=='large' {
-        @media screen and (min-width: $breakpoint-large) {
-            @content;
-        }
+  } @else if $size== "large" {
+    @media screen and (min-width: $breakpoint-large) {
+      @content;
     }
-    @else if $size=='larger' {
-        @media screen and (min-width: $breakpoint-larger) {
-            @content;
-        }
+  } @else if $size== "larger" {
+    @media screen and (min-width: $breakpoint-larger) {
+      @content;
     }
+  }
 }
 
-@mixin button{
-    border-radius: 0.4rem;
-    background-color: $primary-color;
-    color: $white;
+@mixin button {
+  border-radius: 0.4rem;
+  background-color: $primary-color;
+  color: $white;
+  will-change: transform, opacity, background-color;
+  transition: ease-in-out 0.3s all;
+  &:hover {
+    opacity: 0.88;
+    background-color: #db8c0a;
+    transform: translate(0, -1px);
+  }
 }

@@ -18,8 +18,9 @@
           <p class="event__details-description">
             Two-Time Grammy Award winner, Nathaniel Cole, who’s also just
             released an album, Into The Wild, will be having his first concert
-            in Lagos, Nigeria!<br/> Fans have waited so long for this announcement,
-            and it promises to be everything anyone has imagined.
+            in Lagos, Nigeria!<br />
+            Fans have waited so long for this announcement, and it promises to
+            be everything anyone has imagined.
           </p>
           <h3 class="event__details-price">{{ article.price }}</h3>
           <div class="event__details-cta">
@@ -32,11 +33,13 @@
       <section class="event__details-others">
         <div class="event__details-address-wrapper">
           <div class="event__details-address">
-            <span>
+            <p class="label">
               Venue
-            </span>
-            <p>
-              Eko Atlantic Beach, Off Ahmadu<br/> Bello way, Victoria Island,<br/> Lagos.
+            </p>
+            <p class="venue">
+              Eko Atlantic Beach, Off Ahmadu<br />
+              Bello way, Victoria Island,<br />
+              Lagos.
             </p>
           </div>
           <div class="event__details-map">
@@ -85,12 +88,12 @@
               </router-link>
             </p>
             <p class="event__details-socials-link">
-              <router-link to="/"  class="social-link">
+              <router-link to="/" class="social-link">
                 http://www.nathanielcole.com
               </router-link>
             </p>
             <p class="event__details-socials-link">
-              <router-link to="/"  class="social-link">
+              <router-link to="/" class="social-link">
                 http://www.nathanielcole.com
               </router-link>
             </p>
@@ -119,7 +122,7 @@ export default {
     background-size: cover;
   }
   @include screen(large) {
-    background-position:  bottom 5px right 7px;
+    background-position: bottom 5px right 7px;
   }
   &__details {
     max-width: 1440px;
@@ -145,9 +148,11 @@ export default {
       border-bottom: 1px solid #ccb7b1;
       margin-bottom: 2rem;
       @include screen(menner) {
-        padding-top: 4rem;
         flex-direction: row-reverse;
         margin-bottom: 5rem;
+      }
+      @include screen(midder) {
+        padding-top: 4rem;
       }
     }
     &-image {
@@ -156,7 +161,7 @@ export default {
         object-fit: cover;
         border-radius: 6px;
       }
-      @include screen (larger){
+      @include screen(larger) {
       }
     }
     &-image-wrapper {
@@ -173,6 +178,7 @@ export default {
     }
     &-date {
       color: $sub-color;
+      text-transform: uppercase;
       font-family: "SF Display";
       font-weight: 500;
       margin-top: 0.5rem;
@@ -188,11 +194,11 @@ export default {
       margin-bottom: 1.4rem;
       margin-top: 1rem;
       font-size: 2.2rem;
-      @include screen (menner){
+      @include screen(menner) {
         font-size: 3.6rem;
         line-height: 4rem;
       }
-      @include screen (larger){
+      @include screen(larger) {
         width: 28rem;
       }
     }
@@ -200,7 +206,7 @@ export default {
       font-family: $font-primary;
       color: $tertiary-color;
       font-style: italic;
-      @include screen (menner){
+      @include screen(menner) {
         font-size: 1.8rem;
         line-height: 2.8rem;
         width: 95%;
@@ -240,18 +246,20 @@ export default {
       }
     }
     &-address {
-       margin-top: 1.8rem;
-      & > span {
+      & > .label {
         font-family: "SF Display";
         font-weight: 500;
         line-height: 2.4rem;
         text-transform: uppercase;
         color: $text-color;
+        @include screen(med) {
+          margin-top: 1.8rem;
+        }
         @include screen(menner) {
           font-size: 1.8rem;
         }
       }
-      & > p {
+      & .venue {
         line-height: 2rem;
         font-size: 1.8rem;
         font-weight: bold;
@@ -273,21 +281,22 @@ export default {
       & > span {
         margin-right: 1.6rem;
       }
-      & > p{
+      & > p {
+        font-weight: bold;
+        font-size: 1.6rem;
         @include screen(menner) {
           line-height: 1.8rem;
         }
       }
     }
     &-misc {
-       margin-top: 1.8rem;
-      @include screen (menner){
-        width: 50%
+      @include screen(menner) {
+        width: 50%;
       }
     }
-    &-address-wrapper{
-      @include screen (menner){
-        width: 50%
+    &-address-wrapper {
+      @include screen(menner) {
+        width: 50%;
       }
     }
     &-startdate-label {
@@ -300,6 +309,7 @@ export default {
       }
       @include screen(menner) {
         font-size: 1.8rem;
+        line-height: 2.4rem;
       }
     }
     &-startdate {
@@ -325,22 +335,22 @@ export default {
         color: $sub-color;
         margin-bottom: 1rem;
         line-height: 2rem;
-        @include screen (menner){
+        @include screen(menner) {
           font-size: 1.8rem;
         }
       }
     }
-    &-others{
+    &-others {
       padding-bottom: 3rem;
-      @include screen(menner){
+      @include screen(menner) {
         display: flex;
       }
-      @include screen (midder){
-          padding-top: 5rem;
+      @include screen(midder) {
+        padding-top: 5rem;
       }
     }
   }
-  .social-link{
+  .social-link {
     color: $sub-color;
   }
 }

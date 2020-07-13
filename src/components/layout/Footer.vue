@@ -37,12 +37,11 @@
       @include screen(mid) {
         margin-top: 2rem;
       }
+      font-family: "SF Display";
+      font-weight: 500;
       & > li:last-child {
         @include screen(mid) {
           margin-top: 2rem;
-        }
-        @include screen (large){
-          /* margin-right: 5rem; */
         }
       }
       & > li:first-child {
@@ -59,8 +58,10 @@
       }
     }
     &-copyright {
-      &-link{
+      &-link {
         color: $tertiary-color;
+        font-family: "SF Display";
+        font-weight: 500;
       }
     }
   }
