@@ -141,12 +141,8 @@ export default {
     padding: 0;
   }
   &__menu {
-    /* display: flex;
-      align-items: center; */
     @include screen(medder) {
       display: none;
-    }
-    &-icons {
     }
     &-options {
       color: $text-color;
@@ -175,13 +171,14 @@ export default {
       &:first-child {
         @include screen(mid) {
           margin-bottom: 2rem;
-          font-size: 2rem;
+          font-size: 1.6rem;
         }
         @include screen(medder) {
           letter-spacing: 0.0508366rem;
           line-height: 1.7rem;
           font-weight: bold;
           margin-right: 3.8rem;
+          font-size: 1.4rem;
         }
       }
     }
@@ -190,7 +187,7 @@ export default {
       cursor: pointer;
       box-shadow: 0px 1.01673px 1.01673px rgba(0, 0, 0, 0.5);
       line-height: 1.5rem;
-      padding: 0.66rem 1.188rem;
+      padding: 1.2rem 1.4rem;
       letter-spacing: 0.0508366rem;
       font-weight: bold;
       font-size: 1.22008rem;

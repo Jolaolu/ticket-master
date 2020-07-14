@@ -101,22 +101,17 @@ export default {
     }
   }
   &-listing {
-    @include screen (mid) {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-    }
     @include screen (midder){
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
       width: 100%;
     }
     @include screen (large){
       width: 100%;
       display: grid;
       grid-template-columns: 31% 31% 31%;
-      column-gap: 3%;
+      column-gap: 2%;
       row-gap: 2%;
     }
     @include screen(larger){

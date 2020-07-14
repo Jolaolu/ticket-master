@@ -16,7 +16,7 @@
             stroke-linejoin="round"
           />
         </svg>
-        <span>close</span>
+        <span>Close</span>
       </button>
       <h1 class="checkout__details-event-name">The Nathan Cole Experience</h1>
       <span class="checkout__details-event-date">8th February 2019</span>
@@ -49,41 +49,60 @@
     </section>
     <section class="checkout__summary">
       <h3 class="checkout__summary-header">
-       <span v-if="currentTabComponent ==='summary' ">  Order summary </span>
-       <span v-else class="form">
-         <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 12H5M12 19l-7-7 7-7" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span> Go back</span> </span>
+        <span v-if="currentTabComponent !== 'Form'"> Order summary </span>
+        <span v-else class="form" @click="currentTabComponent=''">
+          <svg
+            width="24"
+            height="24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 12H5M12 19l-7-7 7-7"
+              stroke="#333"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span> Go back</span>
+        </span>
       </h3>
+      <div v-if="currentTabComponent === 'Form'">
       <keep-alive>
         <component :is="currentTabComponent"></component>
       </keep-alive>
+      </div>
+      <div class="" v-if="currentTabComponent !== 'Form'">
+        <div class="checkout__summary-ticket-info-wrapper">
+          <div class="checkout__summary-ticket-info">
+            <p class="ticket-name">2 - Regular</p>
+            <p class="ticket-total">N10,000</p>
+          </div>
+          <div class="checkout__summary-ticket-info">
+            <p class="ticket-name">1 - VIP</p>
+            <p class="ticket-total">N100,000</p>
+          </div>
+        </div>
+        <div class="checkout__summary-details">
+          <div class="checkout__summary-details-item">
+            <p class="item-name">Sub-total</p>
+            <p class="item-total">N110,000</p>
+          </div>
+          <div class="checkout__summary-details-item">
+            <p class="item-name">VAT</p>
+            <p class="item-total">N1000</p>
+          </div>
+          <div class="checkout__summary-details-item">
+            <p class="total-label">Total payment</p>
+            <p class="total-amount">N111,000</p>
+          </div>
+          <div class="button-wrapper">
+            <button class="" @click="currentTabComponent='Form'">Continue</button>
+          </div>
+        </div>
+      </div>
 
-      <div class="checkout__summary-ticket-info-wrapper">
-        <div class="checkout__summary-ticket-info">
-          <p class="ticket-name">2 - Regular</p>
-          <p class="ticket-total">N10,000</p>
-        </div>
-        <div class="checkout__summary-ticket-info">
-          <p class="ticket-name">1 - VIP</p>
-          <p class="ticket-total">N100,000</p>
-        </div>
-      </div>
-      <div class="checkout__summary-details">
-        <div class="checkout__summary-details-item">
-          <p class="item-name">Sub-total</p>
-          <p class="item-total">N110,000</p>
-        </div>
-        <div class="checkout__summary-details-item">
-          <p class="item-name">VAT</p>
-          <p class="item-total">N1000</p>
-        </div>
-        <div class="checkout__summary-details-item">
-          <p class="total-label">Total payment</p>
-          <p class="total-amount">N111,000</p>
-        </div>
-        <div class="button-wrapper">
-          <button class="">Continue</button>
-        </div>
-      </div>
       <div class="money-back-wrapper">
         <svg
           width="26"
@@ -109,10 +128,12 @@
 <script>
 import Increment from '@/components/cart/Increment.vue'
 import Decrement from '@/components/cart/Decrement.vue'
+import Form from '@/components/cart/CheckoutForm.vue'
 export default {
   components: {
     Increment,
-    Decrement
+    Decrement,
+    Form
   },
   data () {
     return {
@@ -185,6 +206,8 @@ export default {
       font-family: $font-secondary;
       margin-top: 0.5rem;
       font-size: 1.2rem;
+      text-transform: uppercase;
+      font-family: $font-tertiary;
       @include screen(menner) {
         font-size: 1.8rem;
         line-height: 2.4rem;
@@ -275,22 +298,22 @@ export default {
       margin-bottom: 2rem;
       border-bottom: 1px solid #bdbdbd;
       letter-spacing: 0.065rem;
-      & .form{
+      & .form {
         display: flex;
         cursor: pointer;
         align-items: center;
         text-transform: capitalize;
-        & svg{
-          &:hover{
+        & svg {
+          &:hover {
             margin-right: 3px;
           }
-          transition: transform .3s ease;
+          transition: transform 0.3s ease;
         }
         & span {
-           &:hover{
+          &:hover {
             margin-left: 3px;
           }
-          transition: transform .3s ease;
+          transition: transform 0.3s ease;
         }
       }
       @include screen(midder) {
