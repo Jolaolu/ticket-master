@@ -1,7 +1,7 @@
 <template>
-  <main class="checkout">
+  <main class="checkout container">
     <section class="checkout__details">
-      <button class="checkout__details-goback">
+      <button class="checkout__details-goback" @click.prevent="$router.go(-1)">
         <svg
           width="18"
           height="18"
@@ -29,17 +29,17 @@
           </div>
         </div>
         <div class="checkout__details-tickets-item">
-          <p class="checkout__details-tickets-item-type">Table for 5</p>
-          <p class="checkout__details-tickets-item-amount">N1,000,000</p>
-          <div class="checkout__details-tickets-item-count">
-            <Decrement /> <span> 2 </span> <Increment />
-          </div>
-        </div>
-        <div class="checkout__details-tickets-item">
           <p class="checkout__details-tickets-item-type">VIP</p>
           <p class="checkout__details-tickets-item-amount">N100,000</p>
           <div class="checkout__details-tickets-item-count">
-            <Decrement /> <span> 2 </span> <Increment />
+            <Decrement /> <span> 1 </span> <Increment />
+          </div>
+        </div>
+        <div class="checkout__details-tickets-item">
+          <p class="checkout__details-tickets-item-type">Table for 5</p>
+          <p class="checkout__details-tickets-item-amount">N1,000,000</p>
+          <div class="checkout__details-tickets-item-count">
+            <Decrement /> <span> 0 </span> <Increment />
           </div>
         </div>
         <p class="checkout__details-tickets-info">
@@ -49,8 +49,14 @@
     </section>
     <section class="checkout__summary">
       <h3 class="checkout__summary-header">
-        Order summary
+       <span v-if="currentTabComponent ==='summary' ">  Order summary </span>
+       <span v-else class="form">
+         <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 12H5M12 19l-7-7 7-7" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span> Go back</span> </span>
       </h3>
+      <keep-alive>
+        <component :is="currentTabComponent"></component>
+      </keep-alive>
+
       <div class="checkout__summary-ticket-info-wrapper">
         <div class="checkout__summary-ticket-info">
           <p class="ticket-name">2 - Regular</p>
@@ -101,10 +107,17 @@
   </main>
 </template>
 <script>
+import Increment from '@/components/cart/Increment.vue'
+import Decrement from '@/components/cart/Decrement.vue'
 export default {
   components: {
-    Increment: () => import('@/components/cart/Increment.vue'),
-    Decrement: () => import('@/components/cart/Decrement.vue')
+    Increment,
+    Decrement
+  },
+  data () {
+    return {
+      currentTabComponent: ''
+    }
   }
 }
 </script>
@@ -112,9 +125,26 @@ export default {
 .checkout {
   background-color: $background-color;
   height: 100%;
-  /* padding-left: 13.3rem; */
   padding: 2rem 3rem 0;
+  @include screen(menner) {
+    padding: 0 0 0 2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  @include screen(large) {
+    min-height: 130vh;
+  }
   &__details {
+    @include screen(menner) {
+      padding-top: 3rem;
+      width: 62%;
+    }
+    @include screen(large) {
+      padding-left: 13.3rem;
+      padding-right: 14.8rem;
+      padding-top: 5rem;
+      width: 67.4%;
+    }
     &-goback {
       outline: inherit;
       box-shadow: -1px 2px 4px rgba(0, 0, 0, 0.25);
@@ -125,6 +155,9 @@ export default {
       display: flex;
       align-items: center;
       cursor: pointer;
+      @include screen(large) {
+        padding: 1.24rem 2.9rem;
+      }
       &:hover {
         opacity: 0.7;
       }
@@ -149,8 +182,7 @@ export default {
     }
     &-event-date {
       color: $secondary-color;
-      font-family: "SF Display";
-      font-weight: 500;
+      font-family: $font-secondary;
       margin-top: 0.5rem;
       font-size: 1.2rem;
       @include screen(menner) {
@@ -162,21 +194,42 @@ export default {
       margin-top: 5rem;
       color: $text-color;
       font-family: $font-primary;
+      @include screen(large) {
+        margin-top: 8.1rem;
+      }
       &-item {
         display: flex;
+        align-items: center;
         justify-content: space-between;
         padding-bottom: 1.5rem;
         margin-bottom: 1.6rem;
         border-bottom: 1px solid #bdbdbd;
+        @include screen(large) {
+          padding-bottom: 2.5rem;
+          margin-bottom: 2.1rem;
+        }
+        &:last-of-type {
+          @include screen(large) {
+            margin-bottom: 1.4rem;
+          }
+        }
         &-count {
           width: 30%;
           display: flex;
+          @include screen(large) {
+            width: 20%;
+            justify-content: flex-end;
+          }
           & > span {
             margin: 0 1.6rem;
           }
         }
         &-type {
           width: 25%;
+          @include screen(large) {
+            font-size: 2.4rem;
+            line-height: 2.4rem;
+          }
         }
         &-amount {
           width: 35%;
@@ -186,20 +239,34 @@ export default {
           font-weight: bold;
           letter-spacing: 0.05rem;
           font-size: 1.7rem;
+          @include screen(large) {
+            font-size: 2.4rem;
+            line-height: 2.8rem;
+            letter-spacing: 0.05rem;
+          }
         }
       }
       &-info {
         color: #828282;
         font-size: 1.2rem;
-        /* line-height: 2.8rem; */
-
         letter-spacing: 0.05rem;
+        @include screen(large) {
+          font-size: 1.4rem;
+          line-height: 2.8rem;
+        }
       }
     }
   }
   &__summary {
     background: $white;
     padding: 3rem 1rem 5rem;
+    @include screen(menner) {
+      width: 36%;
+    }
+    @include screen(large) {
+      width: 32.6%;
+      padding: 5rem 5.1rem 0;
+    }
     &-header {
       text-transform: uppercase;
       color: $text-color;
@@ -207,6 +274,32 @@ export default {
       padding-bottom: 1rem;
       margin-bottom: 2rem;
       border-bottom: 1px solid #bdbdbd;
+      letter-spacing: 0.065rem;
+      & .form{
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        text-transform: capitalize;
+        & svg{
+          &:hover{
+            margin-right: 3px;
+          }
+          transition: transform .3s ease;
+        }
+        & span {
+           &:hover{
+            margin-left: 3px;
+          }
+          transition: transform .3s ease;
+        }
+      }
+      @include screen(midder) {
+        padding-left: 2rem;
+      }
+      @include screen(large) {
+        padding-bottom: 3rem;
+        margin-bottom: 3.4rem;
+      }
     }
     &-ticket-info {
       display: flex;
@@ -224,6 +317,10 @@ export default {
         padding-bottom: 8rem;
         border-bottom: 1px solid #bdbdbd;
         margin-bottom: 2rem;
+        @include screen(large) {
+          padding-bottom: 17.9rem;
+          margin-bottom: 3.4rem;
+        }
       }
     }
     &-details {
@@ -235,6 +332,9 @@ export default {
         line-height: 1.7rem;
         font-family: $font-primary;
         margin-bottom: 1rem;
+        @include screen(menner) {
+          margin-bottom: 2rem;
+        }
         & > .item-name {
           font-weight: bold;
         }
@@ -248,6 +348,9 @@ export default {
           font-size: 2rem;
           font-weight: bold;
           line-height: 2.9rem;
+          @include screen(large) {
+            font-size: 2.4rem;
+          }
         }
       }
       & > .button-wrapper {
@@ -256,23 +359,41 @@ export default {
         & > button {
           border: 0;
           padding: 1.2rem 5rem;
+          text-transform: uppercase;
+          font-weight: bold;
           @include button;
+          @include screen(midder) {
+            margin-top: 2rem;
+            padding-left: 8rem;
+            padding-right: 8rem;
+          }
+          @include screen(large) {
+            margin-top: 3rem;
+            font-size: 1.4rem;
+            line-height: 1.4rem;
+            letter-spacing: 0.05rem;
+            padding: 1.8rem 14.55rem;
+          }
         }
       }
     }
-    &> .money-back-wrapper{
+    & > .money-back-wrapper {
       display: flex;
       align-items: center;
+      justify-content: center;
+      @include screen(large) {
+        justify-content: start;
+      }
       margin-top: 2.7rem;
-      & .money-back{
+      & .money-back {
         margin-left: 1rem;
-         letter-spacing: 0.05rem;
-          line-height: 1.4rem;
-        & p{
+        letter-spacing: 0.05rem;
+        line-height: 1.4rem;
+        & p {
           font-weight: bold;
           font-size: 1.4rem;
         }
-        &span{
+        & span {
           font-size: 1.3rem;
           color: #828282;
         }

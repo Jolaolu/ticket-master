@@ -1,5 +1,5 @@
 <template>
-  <div class="event">
+  <div class="event container">
     <NavBar />
     <main class="event__details">
       <section class="event__details-main">
@@ -27,6 +27,9 @@
             <button class="event__details-cta-item">
               Buy Ticket
             </button>
+            <!-- <router-link :to="{name: 'CartManagementView',  params:{ id: id, article:article }}" class="event__details-cta-item">
+              Buy Ticket
+            </router-link> -->
           </div>
         </div>
       </section>
@@ -112,9 +115,6 @@ export default {
 </script>
 <style lang="scss">
 .event {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   min-height: 100vh;
   background-image: url("~@/assets/images/Lines.png");
   background-repeat: no-repeat;
@@ -122,10 +122,11 @@ export default {
     background-size: cover;
   }
   @include screen(large) {
+    /* TODO:  fix LINES */
     background-position: bottom 5px right 7px;
+    /* background-position: bottom 0 right 0; */
   }
   &__details {
-    max-width: 1440px;
     padding-top: 5.8rem;
     padding-left: 3rem;
     padding-right: 3rem;
@@ -179,7 +180,7 @@ export default {
     &-date {
       color: $sub-color;
       text-transform: uppercase;
-      font-family: "SF Display";
+      font-family: $font-secondary;
       font-weight: 500;
       margin-top: 0.5rem;
       font-size: 1.2rem;
@@ -243,11 +244,14 @@ export default {
         @include screen(menner) {
           padding: 1.8rem 12rem;
         }
+        &:visited{
+          color: $white;
+        }
       }
     }
     &-address {
       & > .label {
-        font-family: "SF Display";
+        font-family: $font-secondary;
         font-weight: 500;
         line-height: 2.4rem;
         text-transform: uppercase;
@@ -300,7 +304,7 @@ export default {
       }
     }
     &-startdate-label {
-      font-family: "SF Display";
+      font-family: $font-secondary;
       font-weight: 500;
       line-height: 1.6rem;
       text-transform: uppercase;
@@ -324,7 +328,7 @@ export default {
       }
     }
     &-socials-label {
-      font-family: "SF Display";
+      font-family: $font-secondary;
       font-weight: 500;
       line-height: 1.6rem;
       margin-top: 1.6rem;

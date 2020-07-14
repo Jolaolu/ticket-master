@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer container">
     <div class="footer__wrapper">
       <div class="footer__wrapper-copyright">
         <router-link to="/" class="footer__wrapper-copyright-link">
@@ -15,15 +15,11 @@
 </template>
 <style lang="scss">
 .footer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
   &__wrapper {
-    max-width: 1440px;
     width: 100%;
     bottom: 0;
     font-size: 1.4rem;
-    font-family: "SF Display";
+    font-family: $font-secondary;
     font-weight: 500;
     color: $tertiary-color;
     padding: 0 3rem 3rem;
@@ -37,7 +33,7 @@
       @include screen(mid) {
         margin-top: 2rem;
       }
-      font-family: "SF Display";
+      font-family: $font-secondary;
       font-weight: 500;
       & > li:last-child {
         @include screen(mid) {
@@ -60,7 +56,7 @@
     &-copyright {
       &-link {
         color: $tertiary-color;
-        font-family: "SF Display";
+        font-family: $font-secondary;
         font-weight: 500;
       }
     }

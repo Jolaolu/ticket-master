@@ -178,7 +178,7 @@ export default {
           font-size: 2rem;
         }
         @include screen(medder) {
-          letter-spacing: 0.508366px;
+          letter-spacing: 0.0508366rem;
           line-height: 1.7rem;
           font-weight: bold;
           margin-right: 3.8rem;
@@ -191,7 +191,7 @@ export default {
       box-shadow: 0px 1.01673px 1.01673px rgba(0, 0, 0, 0.5);
       line-height: 1.5rem;
       padding: 0.66rem 1.188rem;
-      letter-spacing: 0.508366px;
+      letter-spacing: 0.0508366rem;
       font-weight: bold;
       font-size: 1.22008rem;
       &:visited {

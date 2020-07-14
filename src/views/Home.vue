@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home container">
     <NavBar/>
     <main class="events__page">
       <h1 class="events__page-hero">The best events happening now.</h1>
@@ -77,14 +77,8 @@ export default {
 }
 </script>
 <style lang="scss">
-.home{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .events__page {
   min-height: 100vh;
-  max-width: 1440px;
   padding-top: 7.56rem;
   padding-left: 3rem;
   padding-right: 3rem;
