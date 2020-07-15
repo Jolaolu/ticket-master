@@ -56,7 +56,7 @@ export default {
   padding-left: 3rem;
   padding-right: 3rem;
   padding-bottom: 8rem;
-  @include screen (med){
+  @include screen(med) {
     min-height: 100vh;
   }
   @include screen(large) {

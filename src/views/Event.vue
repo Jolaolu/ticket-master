@@ -6,15 +6,24 @@
         <div class="event__details-image-wrapper">
           <figure>
             <img
+              v-if="event.image"
               class="event__details-image"
-              :src="article.image"
-              :alt="`${article.name} event`"
+              :src="event.image"
+              :alt="`${event.name} event`"
+            />
+            <img
+              v-else
+              class="event__details-image"
+              :src="require('@/assets/images/event-image.png')"
+              :alt="`${event.name} event`"
             />
           </figure>
         </div>
         <div class="event__details-content">
-          <span class="event__details-date">{{ article.date }}</span>
-          <h1 class="event__details-name">{{ article.name }}</h1>
+          <span class="event__details-date">{{
+            format(event.start_time)
+          }}</span>
+          <h1 class="event__details-name">{{ event.name }}</h1>
           <p class="event__details-description">
             Two-Time Grammy Award winner, Nathaniel Cole, who’s also just
             released an album, Into The Wild, will be having his first concert
@@ -22,17 +31,29 @@
             Fans have waited so long for this announcement, and it promises to
             be everything anyone has imagined.
           </p>
-          <h3 class="event__details-price">{{ article.price }}</h3>
+          <h3 class="event__details-price">
+            <span v-if="Object.keys(event.tickets).length >= 1" class="">
+              {{ getMinMax(event.tickets) }}
+            </span>
+          </h3>
           <div class="event__details-cta">
             <button
+              v-if="Object.keys(event.tickets).length === 0"
               class="event__details-cta-item"
               @click="isFreeModalOpen = true"
             >
               REGISTER FOR FREE
             </button>
-            <!-- <router-link :to="{name: 'CartManagementView',  params:{ id: id, article:article }}" class="event__details-cta-item">
+            <router-link
+              v-else
+              :to="{
+                name: 'CartManagementView',
+                params: { id: id, event: event }
+              }"
+              class="event__details-cta-item"
+            >
               Buy Ticket
-            </router-link> -->
+            </router-link>
           </div>
         </div>
       </section>
@@ -214,7 +235,7 @@ import { required, email } from 'vuelidate/lib/validators'
 import Modal from '@/components/Modal.vue'
 export default {
   name: 'EventDetailsView',
-  props: ['id', 'article'],
+  props: ['id', 'event'],
   components: {
     Modal
   },

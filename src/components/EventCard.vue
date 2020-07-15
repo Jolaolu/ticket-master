@@ -8,7 +8,12 @@
         :src="event.image"
         :alt="`${event.name} event`"
       />
-      <img v-else class="event__card-image-item" :src="require('@/assets/images/event-image.png')" alt="" />
+      <img
+        v-else
+        class="event__card-image-item"
+        :src="require('@/assets/images/event-image.png')"
+        :alt="`${event.name} event`"
+      />
     </figure>
     <p class="event__card-date">{{ format(event.start_time) }}</p>
     <h3 class="event__card-name">{{ event.name }}</h3>
@@ -64,5 +69,13 @@ export default {
     margin-top: 0.5rem;
     color: $secondary-color;
   }
+}
+.free {
+  color: $green;
+  font-weight: bold;
+}
+.sold {
+  color: $red;
+  font-weight: bold;
 }
 </style>
