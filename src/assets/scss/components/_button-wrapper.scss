@@ -1,0 +1,27 @@
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  & > button {
+    border: 0;
+    padding: 1.2rem 10rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    @include button;
+    @include screen(midder) {
+      padding-left: 8rem;
+      padding-right: 8rem;
+    }
+    @include screen(large) {
+      font-size: 1.4rem;
+      line-height: 1.4rem;
+      letter-spacing: 0.05rem;
+      padding: 1.8rem 14.55rem;
+    }
+    &:disabled {
+      cursor: not-allowed;
+      color: #db8c0a;
+      opacity: 0.7;
+    }
+  }
+}

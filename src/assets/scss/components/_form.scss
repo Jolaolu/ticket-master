@@ -1,0 +1,40 @@
+.form {
+  &__item {
+    display: flex;
+    flex-direction: column;
+    font-family: $font-tertiary;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    letter-spacing: 0.05rem;
+    margin-bottom: 1.5rem;
+    color: $text-color;
+    @include screen (medder){
+      margin-bottom: 3rem;
+    }
+    &-label {
+      margin-bottom: 0.8rem;
+      @include screen(medder) {
+        margin-bottom: 1.4rem;
+      }
+    }
+    &-input {
+      background: #fdfdfd;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 1rem;
+      outline: inherit;
+      font-size: 1.2rem;
+      @include screen(medder) {
+        padding: 1.7rem 1rem;
+        font-size: 1.6rem;
+      }
+      &-error {
+        border: 1px solid red;
+      }
+    }
+    &-warning {
+      font-size: 1rem;
+      color: red;
+    }
+  }
+}

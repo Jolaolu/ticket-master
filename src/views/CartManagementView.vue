@@ -50,7 +50,7 @@
     <section class="checkout__summary">
       <h3 class="checkout__summary-header">
         <span v-if="currentTabComponent !== 'Form'"> Order summary </span>
-        <span v-else class="form" @click="currentTabComponent=''">
+        <span v-else class="form" @click="currentTabComponent = ''">
           <svg
             width="24"
             height="24"
@@ -69,9 +69,9 @@
         </span>
       </h3>
       <div v-if="currentTabComponent === 'Form'">
-      <keep-alive>
-        <component :is="currentTabComponent"></component>
-      </keep-alive>
+        <keep-alive>
+          <component :is="currentTabComponent"></component>
+        </keep-alive>
       </div>
       <div class="" v-if="currentTabComponent !== 'Form'">
         <div class="checkout__summary-ticket-info-wrapper">
@@ -98,7 +98,9 @@
             <p class="total-amount">N111,000</p>
           </div>
           <div class="button-wrapper">
-            <button class="" @click="currentTabComponent='Form'">Continue</button>
+            <button class="" @click="currentTabComponent = 'Form'">
+              Continue
+            </button>
           </div>
         </div>
       </div>
@@ -283,21 +285,17 @@ export default {
   &__summary {
     background: $white;
     padding: 3rem 1rem 5rem;
+    margin: 4rem 0;
     @include screen(menner) {
+      margin: 0;
       width: 36%;
     }
     @include screen(large) {
-      width: 32.6%;
+      width: 32.64%;
       padding: 5rem 5.1rem 0;
     }
     &-header {
-      text-transform: uppercase;
-      color: $text-color;
-      font-weight: bold;
-      padding-bottom: 1rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #bdbdbd;
-      letter-spacing: 0.065rem;
+      @include header;
       & .form {
         display: flex;
         cursor: pointer;
@@ -315,13 +313,6 @@ export default {
           }
           transition: transform 0.3s ease;
         }
-      }
-      @include screen(midder) {
-        padding-left: 2rem;
-      }
-      @include screen(large) {
-        padding-bottom: 3rem;
-        margin-bottom: 3.4rem;
       }
     }
     &-ticket-info {
@@ -375,27 +366,9 @@ export default {
             font-size: 2.4rem;
           }
         }
-      }
-      & > .button-wrapper {
-        display: flex;
-        justify-content: center;
-        & > button {
-          border: 0;
-          padding: 1.2rem 5rem;
-          text-transform: uppercase;
-          font-weight: bold;
-          @include button;
-          @include screen(midder) {
-            margin-top: 2rem;
-            padding-left: 8rem;
-            padding-right: 8rem;
-          }
-          @include screen(large) {
-            margin-top: 3rem;
-            font-size: 1.4rem;
-            line-height: 1.4rem;
-            letter-spacing: 0.05rem;
-            padding: 1.8rem 14.55rem;
+        &:last-of-type {
+          @include screen(menner) {
+            margin-bottom: 3rem;
           }
         }
       }

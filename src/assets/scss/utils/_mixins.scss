@@ -65,3 +65,19 @@ $breakpoint-larger: 1440px;
     transform: translate(0, -1px);
   }
 }
+@mixin header {
+  text-transform: uppercase;
+  color: $text-color;
+  font-weight: bold;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #bdbdbd;
+  letter-spacing: 0.065rem;
+  @include screen(midder) {
+    padding-left: 2rem;
+  }
+  @include screen(large) {
+    padding-bottom: 3rem;
+    margin-bottom: 3.4rem;
+  }
+}

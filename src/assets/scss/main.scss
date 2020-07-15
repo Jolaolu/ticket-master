@@ -43,6 +43,11 @@
 //mixin
 @import "utils/mixins";
 
+//components
+@import "components/_form";
+@import "components/_counter";
+@import "components/button-wrapper";
+
 html {
   height: 100%;
   overflow: hidden;
@@ -67,17 +72,4 @@ button {
 .container {
   max-width: 1440px;
   margin: 0 auto;
-}
-.counter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  outline: inherit;
-  border: 0;
-  background: $white;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 100%;
-  box-shadow: -1px 1px 2px rgba(0, 0, 0, 0.25);
 }

@@ -24,8 +24,11 @@
           </p>
           <h3 class="event__details-price">{{ article.price }}</h3>
           <div class="event__details-cta">
-            <button class="event__details-cta-item">
-              Buy Ticket
+            <button
+              class="event__details-cta-item"
+              @click="isFreeModalOpen = true"
+            >
+              REGISTER FOR FREE
             </button>
             <!-- <router-link :to="{name: 'CartManagementView',  params:{ id: id, article:article }}" class="event__details-cta-item">
               Buy Ticket
@@ -105,12 +108,136 @@
       </section>
     </main>
     <Footer />
+    <Modal
+      :show="isFreeModalOpen"
+      v-if="isFreeModalOpen"
+      @close="isFreeModalOpen = false"
+      class="modal-container"
+    >
+      <div v-if="!hasRegistered">
+        <div class="form-header">
+          <h3 class="checkout__summary-header">REGISTER FOR FREE</h3>
+          <button @click="isFreeModalOpen = false">
+            <svg
+              width="18"
+              height="18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13.5 4.5l-9 9M4.5 4.5l9 9"
+                stroke="#333"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <article class="form">
+          <div class="form__item">
+            <label class="form__item-label" for="name">Full name</label>
+            <input
+              class="form__item-input"
+              type="text"
+              v-model="data.name"
+              :class="{ 'form__item-input-error': $v.data.name.$error }"
+              @input="$v.data.name.$touch()"
+            />
+            <div v-if="$v.data.name.$error" class="form__item-warning">
+              Name is required.
+            </div>
+          </div>
+          <div class="form__item">
+            <label class="form__item-label" for="email"> Email address</label>
+            <input
+              class="form__item-input"
+              type="email"
+              v-model.trim="data.email"
+              :class="{ 'form__item-input-error': $v.data.email.$error }"
+              @input="$v.data.email.$touch()"
+            />
+            <div v-if="$v.data.email.$error" class="form__item-warning">
+              Email is required and should be a valid email.
+            </div>
+          </div>
+          <div class="form__item">
+            <label class="form__item-label" for="number">Phone number</label>
+            <input
+              type="text"
+              class="form__item-input"
+              v-model.trim="data.phone"
+              @keypress="isNumber($event)"
+              :class="{ 'form__item-input-error': $v.data.phone.$error }"
+              @input="$v.data.phone.$touch()"
+            />
+            <div v-if="$v.data.phone.$error" class="form__item-warning">
+              Phone number is required.
+            </div>
+          </div>
+          <div class="button-wrapper">
+            <button class="" :disabled="$v.$error || $v.$invalid">
+              REGISTER
+            </button>
+          </div>
+        </article>
+      </div>
+      <article v-else>
+        <div>
+          <button @click="isFreeModalOpen = false">
+            <svg
+              width="18"
+              height="18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M13.5 4.5l-9 9M4.5 4.5l9 9"
+                stroke="#333"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+        <div>
+          You have successfully registered for the nathan cole experience.
+        </div>
+      </article>
+    </Modal>
   </div>
 </template>
 <script>
+import { validationMixin } from 'vuelidate'
+import { required, email } from 'vuelidate/lib/validators'
+import Modal from '@/components/Modal.vue'
 export default {
   name: 'EventDetailsView',
-  props: ['id', 'article']
+  props: ['id', 'article'],
+  components: {
+    Modal
+  },
+  data () {
+    return {
+      isFreeModalOpen: false,
+      hasRegistered: false,
+      isSuccessModalOpen: false,
+      data: {
+        name: '',
+        email: '',
+        phone: ''
+      }
+    }
+  },
+  mixins: [validationMixin],
+  validations: {
+    data: {
+      name: { required },
+      email: { required, email },
+      phone: { required }
+    }
+  }
 }
 </script>
 <style lang="scss">
@@ -244,7 +371,7 @@ export default {
         @include screen(menner) {
           padding: 1.8rem 12rem;
         }
-        &:visited{
+        &:visited {
           color: $white;
         }
       }
@@ -356,6 +483,19 @@ export default {
   }
   .social-link {
     color: $sub-color;
+  }
+}
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #bdbdbd;
+  & button {
+    border: 0;
+    outline: inherit;
+    cursor: pointer;
   }
 }
 </style>
