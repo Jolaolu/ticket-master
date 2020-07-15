@@ -24,7 +24,7 @@
          -->
       </section>
     </main>
-    <!-- <Footer /> -->
+    <Footer />
   </div>
 </template>
 
@@ -88,7 +88,7 @@ export default {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       column-gap: 1.5%;
-      row-gap: 2%;
+      margin-bottom: 3rem;
     }
     &-item {
       @include screen(small) {
