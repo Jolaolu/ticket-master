@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+import advancedFormat from 'dayjs/plugin/advancedFormat'
 export default {
   data: function () {
     return {
@@ -21,6 +23,9 @@ export default {
         }
       }
     }
+  },
+  created () {
+    dayjs.extend(advancedFormat)
   },
   mounted () {
     // Example Implementations for Toast
@@ -66,15 +71,19 @@ export default {
         return true
       }
     },
-
-    /**
-  *  The function generates a random number for a colour in an array
-  *
-  * @param {Number} payload  length of the array
-  */
-    getRandomNumber: function (payload) {
-      const number = Math.floor(Math.random() * payload)
-      return number
+    format: function (date) {
+      return dayjs(date).format('Do MMMM YYYY')
+    },
+    getMinMax: function (tickets) {
+      const price = []
+      tickets.map(ticket => {
+        price.push(ticket.price)
+      })
+      const min = Math.min(...price)
+      const max = Math.max(...price)
+      let minMax
+      max === min ? minMax = `N${max.toLocaleString()}` : minMax = `N${min.toLocaleString()} - N${max.toLocaleString()}`
+      return minMax
     }
   },
   filters: {

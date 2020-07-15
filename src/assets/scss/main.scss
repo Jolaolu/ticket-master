@@ -55,8 +55,9 @@ html {
 body {
   background: $background-color;
   height: 100%;
-  min-height: 100vh;
-  overflow: auto;
+  // min-height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .hidden {
   display: none;

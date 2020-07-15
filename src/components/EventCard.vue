@@ -3,19 +3,31 @@
     <figure class="event__card-image">
       <div v-if="'loading'"></div>
       <img
+        v-if="event.image"
         class="event__card-image-item"
-        :src="article.image"
-        :alt="`${article.name} event`"
+        :src="event.image"
+        :alt="`${event.name} event`"
       />
+      <img v-else class="event__card-image-item" :src="require('@/assets/images/event-image.png')" alt="" />
     </figure>
-    <p class="event__card-date">{{ article.date }}</p>
-    <h3 class="event__card-name">{{ article.name }}</h3>
-    <span class="event__card-price">{{ article.price }}</span>
+    <p class="event__card-date">{{ format(event.start_time) }}</p>
+    <h3 class="event__card-name">{{ event.name }}</h3>
+    <p class="event__card-price">
+      <span
+        class="free"
+        v-if="event.is_free || Object.keys(event.tickets).length === 0"
+      >
+        Free
+      </span>
+      <span class="sold" v-else-if="event.is_sold_out">Sold out</span>
+      <span v-else> {{ getMinMax(event.tickets) }}</span>
+    </p>
   </div>
 </template>
 <script>
 export default {
-  props: ['article']
+  props: ['event'],
+  methods: {}
 }
 </script>
 <style lang="scss">
@@ -25,7 +37,10 @@ export default {
   &-image {
     margin-bottom: 1.9rem;
     &-item {
+      height: 231px;
       border-radius: 6px;
+      width: max-content;
+      object-fit: cover;
     }
   }
   &-date {
