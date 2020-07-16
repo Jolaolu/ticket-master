@@ -45,6 +45,7 @@ export default {
       height: 231px;
       border-radius: 6px;
       width: max-content;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.306764);
       object-fit: cover;
     }
   }

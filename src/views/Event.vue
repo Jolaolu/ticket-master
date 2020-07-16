@@ -26,8 +26,8 @@
           <h1 class="event__details-name">{{ event.name }}</h1>
           <p class="event__details-description">
             Two-Time Grammy Award winner, Nathaniel Cole, who’s also just
-            released an album, Into The Wild, will be having his first concert
-            in Lagos, Nigeria!<br />
+            released an album, <b> Into The Wild, </b>will be having his first
+            concert in Lagos, Nigeria!<br />
             Fans have waited so long for this announcement, and it promises to
             be everything anyone has imagined.
           </p>
@@ -39,7 +39,7 @@
           <div class="event__details-cta">
             <button
               v-if="Object.keys(event.tickets).length === 0"
-              class="event__details-cta-item"
+              class="event__details-cta-item event__details-cta-item-free"
               @click="isFreeModalOpen = true"
             >
               REGISTER FOR FREE
@@ -50,7 +50,7 @@
                 name: 'CartManagementView',
                 params: { id: id, event: event }
               }"
-              class="event__details-cta-item"
+              class="event__details-cta-item  event__details-cta-item-paid"
             >
               Buy Ticket
             </router-link>
@@ -233,6 +233,7 @@
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
 import Modal from '@/components/Modal.vue'
+import { mapGetters } from 'vuex'
 export default {
   name: 'EventDetailsView',
   props: ['id', 'event'],
@@ -258,6 +259,9 @@ export default {
       email: { required, email },
       phone: { required }
     }
+  },
+  computed: {
+    ...mapGetters(['events', 'loading'])
   }
 }
 </script>
@@ -388,9 +392,17 @@ export default {
         border: 1px solid transparent;
         margin-top: 2rem;
         font-size: 1.4rem;
+        line-height: 1.4rem;
         padding: 1.2rem 5rem;
-        @include screen(menner) {
-          padding: 1.8rem 12rem;
+        &-free {
+          @include screen(menner) {
+            padding: 1.8rem 10.4rem;
+          }
+        }
+        &-paid {
+          @include screen(menner) {
+            padding: 1.8rem 13.15rem;
+          }
         }
         &:visited {
           color: $white;

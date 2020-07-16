@@ -3,7 +3,14 @@
     <NavBar />
     <main class="events__page">
       <h1 class="events__page-hero">The best events happening now.</h1>
-      <section id="events-list" class="events__page-listing">
+      <section v-if="loading">
+        <article
+          v-for="index in 8"
+          :key="index"
+          class="events__page-listing-item"
+        ></article>
+      </section>
+      <section v-else id="events-list" class="events__page-listing">
         <article
           v-for="(event, index) in events"
           :key="index"
@@ -42,11 +49,19 @@ export default {
   methods: {
     ...mapActions(['getEvents'])
   },
-  computed: mapGetters(['events']),
-  mounted () {
-    if (this.events.length < 1) {
-      this.getEvents()
+  computed: {
+    ...mapGetters(['eventsData', 'loading']),
+    events: function () {
+      return this.eventsData.data
     }
+  },
+  mounted () {
+    // console.log(this.eventsData)
+    // if (this.eventsData.length <= 1) {
+    //   setTimeout(() => { this.getEvents() }, 2000)
+    //   console.log('1 got executed')
+    // }
+    setTimeout(() => { this.getEvents() }, 2000)
   }
 }
 </script>
@@ -86,7 +101,7 @@ export default {
     @include screen(large) {
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       column-gap: 1.5%;
       margin-bottom: 3rem;
     }

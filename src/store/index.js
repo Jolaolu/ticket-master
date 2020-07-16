@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import { getAllEvents } from '../utils/api'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    events: [],
+    events: {},
     loading: false
   },
   getters: {
-    events: state => state.events,
+    eventsData: state => state.eventsData,
     loading: state => state.loading
   },
   mutations: {
@@ -18,36 +18,22 @@ export default new Vuex.Store({
       state.loading = payload
     },
     SET_EVENTS (state, payload) {
-      state.events = payload
+      // console.log(payload)
+      state.eventsData = { ...payload }
     }
   },
   actions: {
     getEvents ({ commit }) {
       commit('SET_LOADING', true)
-      return new Promise((resolve, reject) => {
-        axios.get('events')
-          .then(response => {
-            const events = []
-            response.data.data.events.map(event => {
-              axios.get(`ticket-types/events/${event.id}`)
-                .then(response => {
-                  const tickets = response.data.data
-                  events.push({ tickets: tickets, ...event })
-                })
-                .catch(err => {
-                  reject(err)
-                })
-            })
-            commit('SET_EVENTS', events)
-            console.log(events)
-            commit('SET_LOADING', false)
-            resolve(response)
-          })
-          .catch(err => {
-            commit('SET_LOADING', false)
-            reject(err)
-          })
-      })
+      getAllEvents()
+        .then(response => {
+          console.log(response)
+          commit('SET_EVENTS', response)
+        })
+      // commit('SET_EVENTS', data)
+      // console.log(data)
+      // localStorage.setItem('events', data)
+      commit('SET_LOADING', false)
     }
   }
 })
