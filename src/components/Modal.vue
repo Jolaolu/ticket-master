@@ -43,7 +43,7 @@ export default {
   margin: -10rem auto 0;
   padding-bottom: 2.8rem;
   border-radius: 15px;
-  background-color: #F2F2F2;
+  background-color: $white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
    padding: 0 2rem;

@@ -32,7 +32,9 @@
 <script>
 export default {
   props: ['event'],
-  methods: {}
+  methods: {},
+  mounted () {
+  }
 }
 </script>
 <style lang="scss">

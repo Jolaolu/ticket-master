@@ -1,7 +1,7 @@
 <template>
   <div class="event container">
     <NavBar />
-    <main class="event__details">
+    <main class="event__details" v-if ="!loading" >
       <section class="event__details-main">
         <div class="event__details-image-wrapper">
           <figure>
@@ -66,7 +66,7 @@
             <p class="venue">
               Eko Atlantic Beach, Off Ahmadu<br />
               Bello way, Victoria Island,<br />
-              Lagos.
+             {{event.venue}}
             </p>
           </div>
           <div class="event__details-map">
@@ -102,7 +102,7 @@
           <div class="event__details-startdate-wrapper">
             <p class="event__details-startdate-label">DATE AND TIME</p>
             <p class="event__details-startdate">
-              Friday, February 8th 2019, 10:00pm
+              {{ formatdate(event.start_time)}}
             </p>
           </div>
           <div class="event__details-socials">
@@ -230,10 +230,11 @@
   </div>
 </template>
 <script>
+// import axios from axios
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
 import Modal from '@/components/Modal.vue'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'EventDetailsView',
   props: ['id', 'event'],
@@ -260,8 +261,23 @@ export default {
       phone: { required }
     }
   },
+  watch: {
+    events: function (newVal) {
+      // this.event = newVal.filter(event => event.id === this.$route.params.id)
+    }
+  },
+  methods: {
+    ...mapActions(['getEvents'])
+  },
   computed: {
     ...mapGetters(['events', 'loading'])
+  },
+  mounted () {
+    // if (this.events === undefined) {
+    //   const id = this.$route.params.id
+    //   this.getEvents().then(response => {this.events = response})
+    //   this.event = this.events.filter(event => event.id === id)
+    // }
   }
 }
 </script>

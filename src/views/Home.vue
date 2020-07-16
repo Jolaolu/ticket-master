@@ -26,15 +26,25 @@
             <EventCard :event="event" />
           </router-link>
         </article>
-        <!-- TODO:
-          add conditional to check if articles exist, if not display a shimmer in its place
-         -->
       </section>
+      <div class="load__more" v-if="pageInfo">
+        <button
+          class="load__more-button"
+          :show="pageInfo.totalPages > pageInfo.currentPage"
+        >
+          Show More
+        </button>
+        <button
+          class="load__more-button"
+          v-if="pageInfo.totalPages === pageInfo.currentPage"
+        >
+          Go back
+        </button>
+      </div>
     </main>
     <Footer />
   </div>
 </template>
-
 <script>
 // @ is an alias to /src
 import { mapActions, mapGetters } from 'vuex'
@@ -47,21 +57,22 @@ export default {
     return {}
   },
   methods: {
-    ...mapActions(['getEvents'])
-  },
-  computed: {
-    ...mapGetters(['eventsData', 'loading']),
-    events: function () {
-      return this.eventsData.data
+    ...mapActions(['getEvents']),
+    loadMore: function () {
+      this.getEvents(this.pageInfo.current++)
     }
   },
-  mounted () {
+  computed: {
+    ...mapGetters(['events', 'pageInfo', 'loading'])
+  },
+  created () {
     // console.log(this.eventsData)
     // if (this.eventsData.length <= 1) {
     //   setTimeout(() => { this.getEvents() }, 2000)
     //   console.log('1 got executed')
     // }
-    setTimeout(() => { this.getEvents() }, 2000)
+    this.getEvents()
+    console.log(this.events)
   }
 }
 </script>
@@ -112,6 +123,26 @@ export default {
       @include screen(midder) {
         width: 35rem;
       }
+    }
+  }
+}
+.load__more {
+  width: 20%;
+  margin: 0 auto;
+  &-button {
+    width: 100%;
+    margin: 0 auto;
+    background: transparent;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border: 1px solid $text-color;
+    margin-bottom: 2rem;
+    will-change: transform, background-color, color;
+    transition: ease-in 0.5s all;
+    &:hover {
+      color: $white;
+      transform: translate(0, -1px);
+      background-color: $text-color;
     }
   }
 }

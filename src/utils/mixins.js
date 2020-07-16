@@ -71,9 +71,15 @@ export default {
         return true
       }
     },
+    // formats to something like  21st september 2019
     format: function (date) {
       return dayjs(date).format('Do MMMM YYYY')
     },
+    // formats to something like "Sunday, September 9th 2018, 7:12 PM"
+    formatdate: function (date) {
+      return dayjs(date).format('dddd, MMMM Do YYYY, h:mm A')
+    },
+    // get minimum and maximum of a price
     getMinMax: function (tickets) {
       const price = []
       tickets.map(ticket => {
