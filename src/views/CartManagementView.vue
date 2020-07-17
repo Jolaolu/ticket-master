@@ -198,6 +198,9 @@ export default {
     display: flex;
     justify-content: space-between;
   }
+  @include screen(midder){
+    min-height: 100vh;
+  }
   @include screen(large) {
     min-height: 130vh;
   }
