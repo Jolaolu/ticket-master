@@ -8,6 +8,7 @@ import Footer from '@/components/layout/Footer'
 import Loader from '@/components/Loader'
 import mixins from './utils/mixins'
 import VueIziToast from 'vue-izitoast'
+
 import 'izitoast/dist/css/iziToast.min.css'
 
 Vue.config.productionTip = false

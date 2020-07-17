@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-const Home = () => import('@/views/Home.vue')
-const EventDetailsView = () => import('@/views/Event.vue')
-const CartView = () => import('@/views/CartManagementView.vue')
+const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home.vue')
+const EventDetailsView = () => import(/* webpackChunkName: "event" */ '@/views/Event.vue')
+const CartView = () => import(/* webpackChunkName: "cart" */ '@/views/CartManagementView.vue')
 
 Vue.use(VueRouter)
 
