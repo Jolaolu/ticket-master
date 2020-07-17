@@ -19,7 +19,7 @@ const routes = [
     props: true
   },
   {
-    path: '/checkout',
+    path: '/event/:id/checkout',
     name: 'CartManagementView',
     component: CartView,
     props: true

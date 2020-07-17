@@ -51,7 +51,7 @@
               v-else
               :to="{
                 name: 'CartManagementView',
-                params: { id: id, event: event }
+                params: { id: event.id, event: event }
               }"
               class="event__details-cta-item  event__details-cta-item-paid"
             >
@@ -249,7 +249,6 @@
 </template>
 <script>
 // import axios from axios
-import axios from 'axios'
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
 import Modal from '@/components/Modal.vue'
@@ -282,44 +281,21 @@ export default {
     }
   },
   watch: {
-    events: function (newVal) {
-      // this.event = newVal.filter(event => event.id === this.$route.params.id)
-    }
+
   },
   methods: {
     ...mapActions(['getEvents', 'registerFree']),
     register: function () {
       this.registerFree({ data: this.data, id: this.id })
       this.hasRegistered = true
-    },
-    getEventData: async function () {
-      this.$store.dispatch('setLoading', true)
-      const id = this.$route.params.id
-      axios.get(`/events/${id}`)
-        .then(async response => {
-          this.event = response.data.data
-          const { data } = await axios.get(`ticket-types/events/${this.event.id}`)
-          this.event.tickets = data.data
-          this.$store.dispatch('setLoading', false)
-        })
-        .catch(err => {
-          this.$store.dispatch('setLoading', false)
-          this.$toast.error(err, 'Error', this.notificationSystem.options.error)
-        })
     }
   },
   computed: {
     ...mapGetters(['events', 'loading'])
   },
-  mounted () {
-    const id = this.$route.params.id
-    console.log(id)
-    console.log(this.events)
-    const event = this.events.find(e => parseInt(e.id) === parseInt(id))
-    console.log(event)
-  },
   created () {
-    this.getEventData()
+    const id = this.$route.params.id
+    this.event = this.events.find(e => parseInt(e.id) === parseInt(id))
   }
 }
 </script>

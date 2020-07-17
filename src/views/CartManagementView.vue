@@ -120,15 +120,16 @@ export default {
     Decrement,
     Form
   },
-  props: ['event', 'id'],
+  props: ['id'],
   data () {
     return {
       currentTabComponent: '',
-      vat: 1000
+      vat: 1000,
+      event: {}
     }
   },
   computed: {
-    ...mapGetters(['tickets']),
+    ...mapGetters(['tickets', 'events']),
     subtotal: function () {
       let total = 0
       this.tickets.forEach(t => {
@@ -151,6 +152,8 @@ export default {
     }
   },
   created () {
+    const id = this.$route.params.id
+    this.event = this.events.find(e => parseInt(e.id) === parseInt(id))
     this.setTickets(this.event.tickets)
   }
 }

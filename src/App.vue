@@ -4,9 +4,19 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'App',
-  components: {
+  methods: {
+    ...mapActions(['getEvents'])
+  },
+  computed: {
+    ...mapGetters(['events', 'pageInfo', 'loading'])
+  },
+  created () {
+    if (this.events.length <= 1) {
+      setTimeout(() => { this.getEvents() }, 2000)
+    }
   }
 }
 </script>
