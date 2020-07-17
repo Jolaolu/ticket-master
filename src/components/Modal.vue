@@ -38,9 +38,12 @@ export default {
 }
 
 .modal-item {
-    max-height: 80vh;
-    height: 100%;
-  @include screen (mid){
+  max-height: 80vh;
+  height: 100%;
+  @include screen(small) {
+    max-height: 90vh !important;
+  }
+  @include screen(mid) {
     width: 315px;
     height: 100%;
     min-height: 50vh;
@@ -55,9 +58,9 @@ export default {
   background-color: $white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
-   padding: 0 2rem;
+  padding: 0 2rem;
   @include screen(medder) {
-     padding: 5rem 5.1rem 2rem;
+    padding: 5rem 5.1rem 2rem;
     width: 470px;
     height: 584px;
   }

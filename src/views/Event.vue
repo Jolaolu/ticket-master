@@ -567,7 +567,7 @@ export default {
   }
 }
 .success__modal{
-  padding-top: 4rem;
+  /* padding-top: 4rem;  */
   &-header{
     display: flex;
     justify-content: flex-end;
@@ -591,7 +591,11 @@ export default {
   }
   &-check-icon{
     display:  flex;
+    margin-top: 6.7rem;
     justify-content: center;
+    @include screen (small){
+      margin-top: 3rem ;
+    }
   }
 }
 </style>
