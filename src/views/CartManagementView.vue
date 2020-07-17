@@ -209,6 +209,10 @@ export default {
       padding-top: 3rem;
       width: 62%;
     }
+    @include screen (midder){
+      width: 55%;
+      margin-left: 4rem;
+    }
     @include screen(large) {
       padding-left: 13.3rem;
       padding-right: 14.8rem;
