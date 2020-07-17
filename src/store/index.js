@@ -1,9 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import mixins from '../utils/mixins'
+import VuexPersistence from 'vuex-persist'
 
 Vue.use(Vuex)
-
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+})
 export default new Vuex.Store({
   state: {
     eventsData: {
@@ -29,6 +33,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    setLoading ({ commit }, payload) {
+      commit('SET_LOADING', payload)
+    },
     async getEvents ({ commit, dispatch }) {
       commit('SET_LOADING', true)
       try {
@@ -40,12 +47,29 @@ export default new Vuex.Store({
             return event
           })
         )
-        commit('SET_LOADING', false)
         commit('SET_EVENTS', events)
         commit('SET_PAGE_DATA', data.data.pageInfo)
+        commit('SET_LOADING', false)
       } catch (error) {
         console.log(error)
+        mixins.methods.handleError(error)
       }
+    },
+    registerFree ({ commit }, { id, data }) {
+      commit('SET_LOADING', true)
+      return new Promise((resolve, reject) => {
+        axios.post(`events/${id}/register`, data)
+          .then(response => {
+            console.log(response)
+            resolve(response)
+            commit('SET_LOADING', false)
+          })
+          .catch(err => {
+            commit('SET_LOADING', false)
+            reject(err)
+          })
+      })
     }
-  }
+  },
+  plugins: [vuexLocal.plugin]
 })

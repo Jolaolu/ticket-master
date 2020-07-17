@@ -1,7 +1,10 @@
 <template>
   <div class="event container">
     <NavBar />
-    <main class="event__details" v-if ="!loading" >
+    <main class="event__details" v-if="loading">
+      <!-- <Loader/> -->
+    </main>
+    <main class="event__details" v-else>
       <section class="event__details-main">
         <div class="event__details-image-wrapper">
           <figure>
@@ -32,13 +35,13 @@
             be everything anyone has imagined.
           </p>
           <h3 class="event__details-price">
-            <span v-if="Object.keys(event.tickets).length >= 1" class="">
+            <span v-if="event.tickets.length >= 1" class="">
               {{ getMinMax(event.tickets) }}
             </span>
           </h3>
           <div class="event__details-cta">
             <button
-              v-if="Object.keys(event.tickets).length === 0"
+              v-if="event.tickets.length === 0"
               class="event__details-cta-item event__details-cta-item-free"
               @click="isFreeModalOpen = true"
             >
@@ -64,9 +67,7 @@
               Venue
             </p>
             <p class="venue">
-              Eko Atlantic Beach, Off Ahmadu<br />
-              Bello way, Victoria Island,<br />
-             {{event.venue}}
+              {{ event.venue }}
             </p>
           </div>
           <div class="event__details-map">
@@ -102,7 +103,7 @@
           <div class="event__details-startdate-wrapper">
             <p class="event__details-startdate-label">DATE AND TIME</p>
             <p class="event__details-startdate">
-              {{ formatdate(event.start_time)}}
+              {{ formatdate(event.start_time) }}
             </p>
           </div>
           <div class="event__details-socials">
@@ -197,47 +198,40 @@
             </div>
           </div>
           <div class="button-wrapper">
-            <button class="" :disabled="$v.$error || $v.$invalid">
+            <button
+              class=""
+              @click="register"
+              :disabled="$v.$error || $v.$invalid"
+            >
               REGISTER
             </button>
           </div>
         </article>
       </div>
-      <article v-else>
-        <div>
+      <article class="success__modal" v-else>
+        <div class="success__modal-header">
           <button @click="isFreeModalOpen = false">
-            <svg
-              width="18"
-              height="18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.5 4.5l-9 9M4.5 4.5l9 9"
-                stroke="#333"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+           <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18M6 6l12 12" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
-        <div>
-          You have successfully registered for the nathan cole experience.
+        <div class="success__modal-check">
+
         </div>
+        <div class="success__modal-text">You have successfully registered for {{ event.name }}.</div>
       </article>
     </Modal>
   </div>
 </template>
 <script>
 // import axios from axios
+import axios from 'axios'
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
 import Modal from '@/components/Modal.vue'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'EventDetailsView',
-  props: ['id', 'event'],
+  props: ['id', 'eventData'],
   components: {
     Modal
   },
@@ -250,7 +244,8 @@ export default {
         name: '',
         email: '',
         phone: ''
-      }
+      },
+      event: {}
     }
   },
   mixins: [validationMixin],
@@ -267,17 +262,32 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getEvents'])
+    ...mapActions(['getEvents', 'registerFree']),
+    register: function () {
+      this.registerFree({ data: this.data, id: this.id })
+      this.hasRegistered = true
+    },
+    getEventData: async function () {
+      this.$store.dispatch('setLoading', true)
+      const id = this.$route.params.id
+      axios.get(`/events/${id}`)
+        .then(async response => {
+          this.event = response.data.data
+          const { data } = await axios.get(`ticket-types/events/${this.event.id}`)
+          this.event.tickets = data.data
+          this.$store.dispatch('setLoading', false)
+        })
+        .catch(err => {
+          this.$store.dispatch('setLoading', false)
+          this.$toast.error(err, 'Error', this.notificationSystem.options.error)
+        })
+    }
   },
   computed: {
-    ...mapGetters(['events', 'loading'])
+    ...mapGetters(['loading'])
   },
-  mounted () {
-    // if (this.events === undefined) {
-    //   const id = this.$route.params.id
-    //   this.getEvents().then(response => {this.events = response})
-    //   this.event = this.events.filter(event => event.id === id)
-    // }
+  created () {
+    this.getEventData()
   }
 }
 </script>
@@ -545,6 +555,30 @@ export default {
     border: 0;
     outline: inherit;
     cursor: pointer;
+  }
+}
+.success__modal{
+  padding-top: 4rem;
+  &-header{
+    display: flex;
+    justify-content: flex-end;
+    & button{
+      border: 0;
+      background: $white;
+    }
+  }
+  &-text{
+    font-size: 1.3rem;
+    line-height: 2.2rem;
+    text-align: center;
+    letter-spacing: 0.065rem;
+    margin-top: 3rem;
+    font-weight: bold;
+    color: $black;
+    @include screen (medder){
+      font-size: 1.8rem;
+      margin-top: 6.7rem;
+    }
   }
 }
 </style>

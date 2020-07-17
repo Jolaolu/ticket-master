@@ -20,7 +20,7 @@
             role="link"
             :to="{
               name: 'EventDetailsView',
-              params: { id: event.id, event: event }
+              params: { id: event.id}
             }"
           >
             <EventCard :event="event" />
@@ -66,13 +66,9 @@ export default {
     ...mapGetters(['events', 'pageInfo', 'loading'])
   },
   created () {
-    // console.log(this.eventsData)
-    // if (this.eventsData.length <= 1) {
-    //   setTimeout(() => { this.getEvents() }, 2000)
-    //   console.log('1 got executed')
-    // }
-    this.getEvents()
-    console.log(this.events)
+    if (this.events.length <= 1) {
+      setTimeout(() => { this.getEvents() }, 2000)
+    }
   }
 }
 </script>
@@ -127,8 +123,11 @@ export default {
   }
 }
 .load__more {
-  width: 20%;
+  width: 50%;
   margin: 0 auto;
+  @include screen (medder){
+      width: 20%;
+  }
   &-button {
     width: 100%;
     margin: 0 auto;
