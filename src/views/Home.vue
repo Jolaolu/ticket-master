@@ -120,7 +120,11 @@ export default {
         width: 100%;
       }
       @include screen(midder) {
-        width: 35rem;
+        width: 34rem;
+        margin: 0 .5rem;
+      }
+      @include screen(medder){
+         margin: 0 1rem;
       }
     }
   }
