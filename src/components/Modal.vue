@@ -38,6 +38,15 @@ export default {
 }
 
 .modal-item {
+    max-height: 80vh;
+    height: 100%;
+  @include screen (mid){
+    width: 315px;
+    height: 100%;
+    min-height: 50vh;
+    max-height: 65vh;
+    padding-top: 2.5rem;
+  }
   width: 310px;
   height: 310px;
   margin: -10rem auto 0;

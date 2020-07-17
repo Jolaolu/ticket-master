@@ -18,28 +18,14 @@
         </svg>
         <span>Close</span>
       </button>
-      <h1 class="checkout__details-event-name">The Nathan Cole Experience</h1>
-      <span class="checkout__details-event-date">8th February 2019</span>
+      <h1 class="checkout__details-event-name">{{event.name}}</h1>
+      <span class="checkout__details-event-date"> {{format(event.start_time)}}</span>
       <div class="checkout__details-tickets">
-        <div class="checkout__details-tickets-item">
-          <p class="checkout__details-tickets-item-type">Regular</p>
-          <p class="checkout__details-tickets-item-amount">N5000</p>
+        <div class="checkout__details-tickets-item" v-for="(ticket, index) in event.tickets" :key="index" >
+          <p class="checkout__details-tickets-item-type">{{ticket.name}}</p>
+          <p class="checkout__details-tickets-item-amount">N{{localeString(ticket.price)}}</p>
           <div class="checkout__details-tickets-item-count">
-            <Decrement /> <span> 2 </span> <Increment />
-          </div>
-        </div>
-        <div class="checkout__details-tickets-item">
-          <p class="checkout__details-tickets-item-type">VIP</p>
-          <p class="checkout__details-tickets-item-amount">N100,000</p>
-          <div class="checkout__details-tickets-item-count">
-            <Decrement /> <span> 1 </span> <Increment />
-          </div>
-        </div>
-        <div class="checkout__details-tickets-item">
-          <p class="checkout__details-tickets-item-type">Table for 5</p>
-          <p class="checkout__details-tickets-item-amount">N1,000,000</p>
-          <div class="checkout__details-tickets-item-count">
-            <Decrement /> <span> 0 </span> <Increment />
+            <Decrement :id="ticket.id" @decrement="decrement" /> <span> {{ticket.count}} </span> <Increment  @increment="increment" :id="ticket.id"/>
           </div>
         </div>
         <p class="checkout__details-tickets-info">
@@ -70,24 +56,20 @@
       </h3>
       <div v-if="currentTabComponent === 'Form'">
         <keep-alive>
-          <component :is="currentTabComponent"></component>
+          <component :total="total" :is="currentTabComponent"></component>
         </keep-alive>
       </div>
       <div class="" v-if="currentTabComponent !== 'Form'">
         <div class="checkout__summary-ticket-info-wrapper">
-          <div class="checkout__summary-ticket-info">
-            <p class="ticket-name">2 - Regular</p>
-            <p class="ticket-total">N10,000</p>
-          </div>
-          <div class="checkout__summary-ticket-info">
-            <p class="ticket-name">1 - VIP</p>
-            <p class="ticket-total">N100,000</p>
+          <div class="checkout__summary-ticket-info" v-for="(ticket, index) in event.tickets" :key="index">
+            <p class="ticket-name">{{ticket.count}} - {{ticket.name}}</p>
+            <p class="ticket-total">N{{localeString(ticket.price)}}</p>
           </div>
         </div>
         <div class="checkout__summary-details">
           <div class="checkout__summary-details-item">
             <p class="item-name">Sub-total</p>
-            <p class="item-total">N110,000</p>
+            <p class="item-total">N{{localeString(subtotal)}}</p>
           </div>
           <div class="checkout__summary-details-item">
             <p class="item-name">VAT</p>
@@ -95,7 +77,7 @@
           </div>
           <div class="checkout__summary-details-item">
             <p class="total-label">Total payment</p>
-            <p class="total-amount">N111,000</p>
+            <p class="total-amount">N{{localeString(total)}}</p>
           </div>
           <div class="button-wrapper">
             <button class="" @click="currentTabComponent = 'Form'">
@@ -128,6 +110,7 @@
   </main>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Increment from '@/components/cart/Increment.vue'
 import Decrement from '@/components/cart/Decrement.vue'
 import Form from '@/components/cart/CheckoutForm.vue'
@@ -137,10 +120,38 @@ export default {
     Decrement,
     Form
   },
+  props: ['event', 'id'],
   data () {
     return {
-      currentTabComponent: ''
+      currentTabComponent: '',
+      vat: 1000
     }
+  },
+  computed: {
+    ...mapGetters(['tickets']),
+    subtotal: function () {
+      let total = 0
+      this.tickets.forEach(t => {
+        total = total + t.count * t.price
+      })
+      return total
+    },
+    total: function () {
+      const total = this.vat + this.subtotal
+      return total
+    }
+  },
+  methods: {
+    ...mapActions(['incrementTicket', 'decrementTicket', 'setTickets']),
+    increment: function (e) {
+      this.incrementTicket(e)
+    },
+    decrement: function (e) {
+      this.decrementTicket(e)
+    }
+  },
+  created () {
+    this.setTickets(this.event.tickets)
   }
 }
 </script>
@@ -302,6 +313,7 @@ export default {
         align-items: center;
         text-transform: capitalize;
         & svg {
+          margin-left: 3px;
           &:hover {
             margin-right: 3px;
           }

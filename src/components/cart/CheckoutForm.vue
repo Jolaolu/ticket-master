@@ -43,10 +43,10 @@
     <div>
       <div class="checkout__summary-details-item">
         <p class="total-label tof">Total payment</p>
-        <p class="total-amount">N111,000</p>
+        <p class="total-amount">N{{localeString(total)}}</p>
       </div>
       <div class="button-wrapper">
-        <button class="" :disabled="$v.$error || $v.$invalid">Continue</button>
+        <button class="" :disabled="$v.$error || $v.$invalid">N{{localeString(total)}}</button>
       </div>
     </div>
   </article>
@@ -65,6 +65,7 @@ export default {
       }
     }
   },
+  props: ['total'],
   mixins: [validationMixin],
   validations: {
     data: {

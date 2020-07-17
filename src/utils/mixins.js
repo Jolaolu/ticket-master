@@ -91,6 +91,9 @@ export default {
       let minMax
       max === min ? minMax = `N${max.toLocaleString()}` : minMax = `N${min.toLocaleString()} - N${max.toLocaleString()}`
       return minMax
+    },
+    localeString: function (price) {
+      return price.toLocaleString()
     }
   },
   filters: {
