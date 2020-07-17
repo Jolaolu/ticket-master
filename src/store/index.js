@@ -27,6 +27,10 @@ export default new Vuex.Store({
     SET_LOADING (state, payload) {
       state.loading = payload
     },
+    CLEAR (state) {
+      state.tickets = ''
+      window.href('/')
+    },
     SET_EVENTS (state, payload) {
       state.eventsData.events.push(...payload)
     },
@@ -55,6 +59,9 @@ export default new Vuex.Store({
     setLoading ({ commit }, payload) {
       commit('SET_LOADING', payload)
     },
+    clear ({ commit }) {
+      commit('CLEAR ')
+    },
     async getEvents ({ commit, dispatch }, page) {
       commit('SET_LOADING', true)
       try {
@@ -70,21 +77,16 @@ export default new Vuex.Store({
         commit('SET_PAGE_DATA', data.data.pageInfo)
         commit('SET_LOADING', false)
       } catch (error) {
-        console.log(error)
         mixins.methods.handleError(error)
       }
     },
     registerFree ({ commit }, { id, data }) {
-      commit('SET_LOADING', true)
       return new Promise((resolve, reject) => {
         axios.post(`events/${id}/register`, data)
           .then(response => {
-            console.log(response)
             resolve(response)
-            commit('SET_LOADING', false)
           })
           .catch(err => {
-            commit('SET_LOADING', false)
             reject(err)
           })
       })

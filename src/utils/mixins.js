@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     handleError (error) {
-      console.log(error)
       if (error === 'Network Error') {
         this.$toast.error(
           'Connection not established, please check your internet connection',

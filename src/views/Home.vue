@@ -4,31 +4,30 @@
     <main class="events__page">
       <h1 class="events__page-hero">The best events happening now.</h1>
       <section v-if="loading">
-        <article
-          v-for="index in 8"
-          :key="index"
-          class="events__page-listing-item"
-        ></article>
+        <Loader />
       </section>
-      <section v-else id="events-list" class="events__page-listing">
-        <article
-          v-for="(event, index) in events"
-          :key="index"
-          class="events__page-listing-item"
-        >
-          <router-link
-            role="link"
-            :to="{
-              name: 'EventDetailsView',
-              params: { id: event.id}
-            }"
+      <transition v-else name="fade" mode="in-out">
+        <section id="events-list" class="events__page-listing">
+          <article
+            v-for="(event, index) in events"
+            :key="index"
+            class="events__page-listing-item"
           >
-            <EventCard :event="event" />
-          </router-link>
-        </article>
-      </section>
-      <div class="load__more" v-if="pageInfo">
-        <button @click="loadMore"
+            <router-link
+              role="link"
+              :to="{
+                name: 'EventDetailsView',
+                params: { id: event.id }
+              }"
+            >
+              <EventCard :event="event" />
+            </router-link>
+          </article>
+        </section>
+      </transition>
+      <div class="load__more" v-if="pageInfo && !loading">
+        <button
+          @click="loadMore"
           class="load__more-button"
           :show="pageInfo.totalPages > pageInfo.currentPage"
         >
@@ -69,7 +68,9 @@ export default {
   },
   created () {
     if (this.events.length <= 1) {
-      setTimeout(() => { this.getEvents(this.page) }, 2000)
+      setTimeout(() => {
+        this.getEvents(this.page)
+      }, 2000)
     }
   }
 }
@@ -127,8 +128,8 @@ export default {
 .load__more {
   width: 50%;
   margin: 0 auto;
-  @include screen (medder){
-      width: 20%;
+  @include screen(medder) {
+    width: 20%;
   }
   &-button {
     width: 100%;

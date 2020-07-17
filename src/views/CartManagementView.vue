@@ -1,113 +1,130 @@
 <template>
-  <main class="checkout container">
-    <section class="checkout__details">
-      <button class="checkout__details-goback" @click.prevent="$router.go(-1)">
-        <svg
-          width="18"
-          height="18"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+    <main class="checkout container">
+      <section class="checkout__details">
+        <button
+          class="checkout__details-goback"
+          @click.prevent="$router.go(-1)"
         >
-          <path
-            d="M13.5 4.5l-9 9M4.5 4.5l9 9"
-            stroke="#333"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-        <span>Close</span>
-      </button>
-      <h1 class="checkout__details-event-name">{{event.name}}</h1>
-      <span class="checkout__details-event-date"> {{format(event.start_time)}}</span>
-      <div class="checkout__details-tickets">
-        <div class="checkout__details-tickets-item" v-for="(ticket, index) in event.tickets" :key="index" >
-          <p class="checkout__details-tickets-item-type">{{ticket.name}}</p>
-          <p class="checkout__details-tickets-item-amount">N{{localeString(ticket.price)}}</p>
-          <div class="checkout__details-tickets-item-count">
-            <Decrement :id="ticket.id" @decrement="decrement" /> <span> {{ticket.count}} </span> <Increment  @increment="increment" :id="ticket.id"/>
-          </div>
-        </div>
-        <p class="checkout__details-tickets-info">
-          Ticket sales ends on 22nd November 2019
-        </p>
-      </div>
-    </section>
-    <section class="checkout__summary">
-      <h3 class="checkout__summary-header">
-        <span v-if="currentTabComponent !== 'Form'"> Order summary </span>
-        <span v-else class="form" @click="currentTabComponent = ''">
           <svg
-            width="24"
-            height="24"
+            width="18"
+            height="18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M19 12H5M12 19l-7-7 7-7"
+              d="M13.5 4.5l-9 9M4.5 4.5l9 9"
               stroke="#333"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
             />
           </svg>
-          <span> Go back</span>
-        </span>
-      </h3>
-      <div v-if="currentTabComponent === 'Form'">
-        <keep-alive>
-          <component :total="total" :is="currentTabComponent"></component>
-        </keep-alive>
-      </div>
-      <div class="" v-if="currentTabComponent !== 'Form'">
-        <div class="checkout__summary-ticket-info-wrapper">
-          <div class="checkout__summary-ticket-info" v-for="(ticket, index) in event.tickets" :key="index">
-            <p class="ticket-name">{{ticket.count}} - {{ticket.name}}</p>
-            <p class="ticket-total">N{{localeString(ticket.price)}}</p>
-          </div>
-        </div>
-        <div class="checkout__summary-details">
-          <div class="checkout__summary-details-item">
-            <p class="item-name">Sub-total</p>
-            <p class="item-total">N{{localeString(subtotal)}}</p>
-          </div>
-          <div class="checkout__summary-details-item">
-            <p class="item-name">VAT</p>
-            <p class="item-total">N1000</p>
-          </div>
-          <div class="checkout__summary-details-item">
-            <p class="total-label">Total payment</p>
-            <p class="total-amount">N{{localeString(total)}}</p>
-          </div>
-          <div class="button-wrapper">
-            <button class="" @click="currentTabComponent = 'Form'">
-              Continue
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="money-back-wrapper">
-        <svg
-          width="26"
-          height="26"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          <span>Close</span>
+        </button>
+        <h1 class="checkout__details-event-name">{{ event.name }}</h1>
+        <span class="checkout__details-event-date">
+          {{ format(event.start_time) }}</span
         >
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M12.62 25.01l-1.846.828a1.857 1.857 0 01-2.265-.607l-1.185-1.64a.929.929 0 00-.658-.38l-2.013-.206a1.857 1.857 0 01-1.657-1.658l-.208-2.013a.929.929 0 00-.38-.658L.77 17.491a1.857 1.857 0 01-.607-2.265L.99 13.38a.929.929 0 000-.76l-.828-1.846A1.857 1.857 0 01.77 8.509l1.64-1.185a.929.929 0 00.38-.658l.207-2.013a1.857 1.857 0 011.657-1.657l2.013-.208a.929.929 0 00.658-.38L8.509.77a1.857 1.857 0 012.265-.607L12.62.99a.929.929 0 00.76 0l1.846-.828a1.857 1.857 0 012.265.607l1.185 1.64a.929.929 0 00.658.38l2.013.207c.875.09 1.567.782 1.657 1.657l.207 2.013a.929.929 0 00.38.658l1.64 1.185c.713.516.966 1.461.607 2.265l-.828 1.846a.928.928 0 000 .76l.828 1.846c.36.804.106 1.749-.607 2.265l-1.64 1.185a.929.929 0 00-.38.658l-.206 2.013a1.857 1.857 0 01-1.658 1.657l-2.013.207a.929.929 0 00-.658.38l-1.185 1.64a1.857 1.857 0 01-2.265.607l-1.846-.828a.928.928 0 00-.76 0zM7.983 11.243L6.407 12.82l5.29 5.29 8.122-8.12-1.576-1.577-6.546 6.546-3.714-3.715z"
-            fill="#2D9CDB"
-          />
-        </svg>
-        <div class="money-back">
-          <p>100% customer protection</p>
-          <span>Money back guarantee</span>
+        <div class="checkout__details-tickets">
+          <div
+            class="checkout__details-tickets-item"
+            v-for="(ticket, index) in event.tickets"
+            :key="index"
+          >
+            <p class="checkout__details-tickets-item-type">{{ ticket.name }}</p>
+            <p class="checkout__details-tickets-item-amount">
+              N{{ localeString(ticket.price) }}
+            </p>
+            <div class="checkout__details-tickets-item-count">
+              <Decrement :id="ticket.id" @decrement="decrement" />
+              <span> {{ ticket.count }} </span>
+              <Increment @increment="increment" :id="ticket.id" />
+            </div>
+          </div>
+          <p class="checkout__details-tickets-info">
+            Ticket sales ends on 22nd November 2019
+          </p>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+      <section class="checkout__summary">
+        <h3 class="checkout__summary-header">
+          <span v-if="currentTabComponent !== 'Form'"> Order summary </span>
+          <span v-else class="form" @click="currentTabComponent = ''">
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19 12H5M12 19l-7-7 7-7"
+                stroke="#333"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span> Go back</span>
+          </span>
+        </h3>
+        <div v-if="currentTabComponent === 'Form'">
+          <keep-alive>
+            <component :total="total" :vat="vat" :subtotal="subtotal" :id="event.id" :is="currentTabComponent"></component>
+          </keep-alive>
+        </div>
+        <div class="" v-if="currentTabComponent !== 'Form'">
+          <div class="checkout__summary-ticket-info-wrapper">
+            <div
+              class="checkout__summary-ticket-info"
+              v-for="(ticket, index) in event.tickets"
+              :key="index"
+            >
+              <p class="ticket-name">{{ ticket.count }} - {{ ticket.name }}</p>
+              <p class="ticket-total">N{{ localeString(ticket.price) }}</p>
+            </div>
+          </div>
+          <div class="checkout__summary-details">
+            <div class="checkout__summary-details-item">
+              <p class="item-name">Sub-total</p>
+              <p class="item-total">N{{ localeString(subtotal) }}</p>
+            </div>
+            <div class="checkout__summary-details-item">
+              <p class="item-name">VAT</p>
+              <p class="item-total">N1000</p>
+            </div>
+            <div class="checkout__summary-details-item">
+              <p class="total-label">Total payment</p>
+              <p class="total-amount">N{{ localeString(total) }}</p>
+            </div>
+            <div class="button-wrapper">
+              <button class="" @click="currentTabComponent = 'Form'">
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="money-back-wrapper">
+          <svg
+            width="26"
+            height="26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12.62 25.01l-1.846.828a1.857 1.857 0 01-2.265-.607l-1.185-1.64a.929.929 0 00-.658-.38l-2.013-.206a1.857 1.857 0 01-1.657-1.658l-.208-2.013a.929.929 0 00-.38-.658L.77 17.491a1.857 1.857 0 01-.607-2.265L.99 13.38a.929.929 0 000-.76l-.828-1.846A1.857 1.857 0 01.77 8.509l1.64-1.185a.929.929 0 00.38-.658l.207-2.013a1.857 1.857 0 011.657-1.657l2.013-.208a.929.929 0 00.658-.38L8.509.77a1.857 1.857 0 012.265-.607L12.62.99a.929.929 0 00.76 0l1.846-.828a1.857 1.857 0 012.265.607l1.185 1.64a.929.929 0 00.658.38l2.013.207c.875.09 1.567.782 1.657 1.657l.207 2.013a.929.929 0 00.38.658l1.64 1.185c.713.516.966 1.461.607 2.265l-.828 1.846a.928.928 0 000 .76l.828 1.846c.36.804.106 1.749-.607 2.265l-1.64 1.185a.929.929 0 00-.38.658l-.206 2.013a1.857 1.857 0 01-1.658 1.657l-2.013.207a.929.929 0 00-.658.38l-1.185 1.64a1.857 1.857 0 01-2.265.607l-1.846-.828a.928.928 0 00-.76 0zM7.983 11.243L6.407 12.82l5.29 5.29 8.122-8.12-1.576-1.577-6.546 6.546-3.714-3.715z"
+              fill="#2D9CDB"
+            />
+          </svg>
+          <div class="money-back">
+            <p>100% customer protection</p>
+            <span>Money back guarantee</span>
+          </div>
+        </div>
+      </section>
+    </main>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'

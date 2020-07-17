@@ -43,10 +43,16 @@
     <div>
       <div class="checkout__summary-details-item">
         <p class="total-label tof">Total payment</p>
-        <p class="total-amount">N{{localeString(total)}}</p>
+        <p class="total-amount">N{{ localeString(total) }}</p>
       </div>
       <div class="button-wrapper">
-        <button class="" :disabled="$v.$error || $v.$invalid">N{{localeString(total)}}</button>
+        <button
+          class=""
+          @click="MakePayment"
+          :disabled="$v.$error || $v.$invalid"
+        >
+          PAY N{{ localeString(total) }}
+        </button>
       </div>
     </div>
   </article>
@@ -54,7 +60,8 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
-
+import { mapGetters, mapActions } from 'vuex'
+import axios from 'axios'
 export default {
   data () {
     return {
@@ -65,7 +72,7 @@ export default {
       }
     }
   },
-  props: ['total'],
+  props: ['total', 'vat', 'subtotal', 'id'],
   mixins: [validationMixin],
   validations: {
     data: {
@@ -73,11 +80,69 @@ export default {
       email: { required, email },
       phone: { required }
     }
+  },
+  methods: {
+    ...mapActions(['createOrder']),
+    MakePayment: function () {
+      const tickets = {}
+      this.tickets.map(t => {
+        if (t.count >= 1) {
+          tickets[t.id] = t.count
+        }
+      })
+      const data = {
+        ...this.data,
+        base_amount: this.total,
+        value_added_tax: this.vat,
+        event_id: parseInt(this.id),
+        tickets_bought: tickets
+      }
+      const flwKey = process.env.VUE_APP_FLUTTERWAVE_TEST_KEY
+      window.FlutterwaveCheckout({
+        public_key: flwKey,
+        tx_ref: 'ticket-purchase-order' + new Date(),
+        amount: this.total,
+        currency: 'NGN',
+        country: 'NG',
+        payment_options: 'card',
+        customer: {
+          email: this.data.email,
+          phone_number: this.data.phone,
+          name: this.data.name
+        },
+        callback: function () {
+          axios.post('orders', data)
+            .then(response => {
+              console.log(response)
+              this.$toast.success(
+                response.data.status,
+                '',
+                this.notificationSystem.options.success
+              )
+              this.$store.dispatch('clear')
+              window.href = '/'
+            })
+            .catch(err => console.error(err))
+        },
+        onclose: function () {},
+        customizations: {
+          title: 'Inshallah and Vibes',
+          description: 'Payment for Event Ticket'
+        }
+      })
+    }
+  },
+  computed: {
+    ...mapGetters(['tickets'])
+  },
+  created () {
+    const script = document.createElement('script')
+    script.src = 'https://checkout.flutterwave.com/v3.js'
+    document.getElementsByTagName('head')[0].appendChild(script)
   }
 }
 </script>
 <style lang="scss">
-
 .tof {
   font-weight: bold;
 }
