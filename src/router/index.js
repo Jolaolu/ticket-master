@@ -23,7 +23,8 @@ const routes = [
     name: 'CartManagementView',
     component: CartView,
     props: true
-  }
+  },
+  { path: '*', redirect: '/' }
 ]
 
 const router = new VueRouter({

@@ -185,7 +185,6 @@ export default {
   },
   updated () {
     this.newTickets = this.tickets
-    console.log(this.tickets)
   }
 }
 </script>
