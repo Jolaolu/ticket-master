@@ -28,7 +28,7 @@
         </article>
       </section>
       <div class="load__more" v-if="pageInfo">
-        <button
+        <button @click="loadMore"
           class="load__more-button"
           :show="pageInfo.totalPages > pageInfo.currentPage"
         >
@@ -38,7 +38,7 @@
           class="load__more-button"
           v-if="pageInfo.totalPages === pageInfo.currentPage"
         >
-          Go back
+          Go to top
         </button>
       </div>
     </main>
@@ -54,12 +54,14 @@ export default {
     EventCard: () => import('@/components/EventCard.vue')
   },
   data () {
-    return {}
+    return {
+      page: 1
+    }
   },
   methods: {
     ...mapActions(['getEvents']),
     loadMore: function () {
-      this.getEvents(this.pageInfo.current++)
+      this.getEvents(this.page + 1)
     }
   },
   computed: {
@@ -67,7 +69,7 @@ export default {
   },
   created () {
     if (this.events.length <= 1) {
-      setTimeout(() => { this.getEvents() }, 2000)
+      setTimeout(() => { this.getEvents(this.page) }, 2000)
     }
   }
 }

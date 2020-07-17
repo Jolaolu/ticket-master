@@ -28,7 +28,7 @@ export default new Vuex.Store({
       state.loading = payload
     },
     SET_EVENTS (state, payload) {
-      state.eventsData.events = payload
+      state.eventsData.events.push(...payload)
     },
     SET_PAGE_DATA (state, payload) {
       Vue.set(state.eventsData, 'pageInfo', payload)
@@ -55,10 +55,10 @@ export default new Vuex.Store({
     setLoading ({ commit }, payload) {
       commit('SET_LOADING', payload)
     },
-    async getEvents ({ commit, dispatch }) {
+    async getEvents ({ commit, dispatch }, page) {
       commit('SET_LOADING', true)
       try {
-        const { data } = await axios.get('events')
+        const { data } = await axios.get(`events?page${page}`)
         const events = await Promise.all(
           data.data.events.map(async event => {
             const { data } = await axios.get(`ticket-types/events/${event.id}`)

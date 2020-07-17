@@ -15,7 +15,7 @@ export default {
   },
   created () {
     if (this.events.length <= 1) {
-      setTimeout(() => { this.getEvents() }, 2000)
+      setTimeout(() => { this.getEvents(1) }, 2000)
     }
   }
 }
