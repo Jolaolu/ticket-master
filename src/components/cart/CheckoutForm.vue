@@ -47,7 +47,7 @@
       </div>
       <div class="button-wrapper">
         <button
-          class=""
+          class="pay"
           @click="MakePayment"
           :disabled="$v.$error || $v.$invalid"
         >

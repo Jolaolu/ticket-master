@@ -2,6 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  &>.pay{
+      padding: 1.2rem 7rem;
+    @include screen(large) {
+      padding: 1.8rem 12.55rem;
+    }
+  }
   & > button {
     border: 0;
     padding: 1.2rem 10rem;
