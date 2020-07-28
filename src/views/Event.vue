@@ -138,7 +138,7 @@
     >
       <div v-if="!hasRegistered">
         <div class="form-header">
-          <h3 class="checkout__summary-header">REGISTER FOR FREE</h3>
+          <h3 class="">REGISTER FOR FREE</h3>
           <button @click="isFreeModalOpen = false">
             <svg
               width="18"
@@ -580,6 +580,11 @@ export default {
   padding-bottom: 3rem;
   margin-bottom: 3rem;
   border-bottom: 1px solid #bdbdbd;
+  text-transform: uppercase;
+  color: $text-color;
+  font-weight: bold;
+  font-size: 1.8rem;
+  letter-spacing: .065rem;
   & button {
     border: 0;
     background-color: $white;

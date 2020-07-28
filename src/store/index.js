@@ -48,7 +48,7 @@ export default new Vuex.Store({
       const ticket = state.tickets.find(t => t.id === payload)
       ticket.count--
       if (ticket.count <= 0) {
-        ticket.count = 1
+        ticket.count = 0
       }
     },
     SET_TICKETS (state, payload) {
@@ -99,7 +99,7 @@ export default new Vuex.Store({
     },
     setTickets ({ commit }, tickets) {
       const newTickets = tickets.map(e => {
-        e.count = 1
+        e.count = 0
         return e
       })
       commit('SET_TICKETS', newTickets)
