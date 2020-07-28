@@ -141,7 +141,6 @@ export default {
   data () {
     return {
       currentTabComponent: '',
-      vat: 1000,
       event: {}
     }
   },
@@ -153,6 +152,10 @@ export default {
         total = total + t.count * t.price
       })
       return total
+    },
+    vat: function () {
+      const vat = this.subtotal * (5 / 100)
+      return vat
     },
     total: function () {
       const total = this.vat + this.subtotal
@@ -199,7 +202,7 @@ export default {
     display: flex;
     justify-content: space-between;
   }
-  @include screen(midder){
+  @include screen(menner){
     min-height: 100vh;
   }
   @include screen(large) {
