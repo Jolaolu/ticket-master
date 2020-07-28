@@ -97,7 +97,7 @@
               <p class="total-amount">N{{ localeString(total) }}</p>
             </div>
             <div class="button-wrapper">
-              <button class="" @click="currentTabComponent = 'Form'">
+              <button class="" @click="currentTabComponent = 'Form'"  :disabled="chosen">
                 Continue
               </button>
             </div>
@@ -157,6 +157,10 @@ export default {
     total: function () {
       const total = this.vat + this.subtotal
       return total
+    },
+    chosen: function () {
+      const value = this.tickets.some(t => t.count >= 1)
+      return !value
     }
   },
   methods: {
