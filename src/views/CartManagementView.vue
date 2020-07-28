@@ -342,6 +342,8 @@ export default {
     padding: 3rem 1rem 5rem;
     margin: 4rem 0;
     @include screen(menner) {
+      padding-right: 2rem;
+      padding-left: 2rem;
       margin: 0;
       width: 36%;
     }
