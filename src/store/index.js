@@ -12,9 +12,9 @@ export default new Vuex.Store({
   state: {
     eventsData: {
       events: [],
-      pageInfo: {},
-      tickets: []
+      pageInfo: {}
     },
+    tickets: [],
     loading: false
   },
   getters: {
@@ -39,20 +39,24 @@ export default new Vuex.Store({
     },
     INCREMENT_TICKET (state, payload) {
       const ticket = state.tickets.find(t => t.id === payload)
+      const ticketIndex = state.tickets.indexOf(ticket)
       ticket.count++
       if (ticket.count >= ticket.qty_available) {
         ticket.count = ticket.qty_available
       }
+      state.tickets.splice(ticketIndex, 1, ticket)
     },
     DECREMENT_TICKET (state, payload) {
       const ticket = state.tickets.find(t => t.id === payload)
+      const ticketIndex = state.tickets.indexOf(ticket)
       ticket.count--
       if (ticket.count <= 0) {
         ticket.count = 0
       }
+      state.tickets.splice(ticketIndex, 1, ticket)
     },
     SET_TICKETS (state, payload) {
-      state.tickets = payload
+      state.tickets = [...payload]
     }
   },
   actions: {

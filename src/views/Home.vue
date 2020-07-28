@@ -25,7 +25,7 @@
           </article>
         </section>
       </transition>
-      <div class="load__more" v-if="pageInfo && !loading">
+      <div class="load__more" v-if="pageInfo && loading===false">
         <button
           @click="loadMore"
           class="load__more-button"
@@ -41,7 +41,7 @@
         </button>
       </div>
     </main>
-    <Footer />
+   <div v-if="!loading"> <Footer /> </div>
   </div>
 </template>
 <script>

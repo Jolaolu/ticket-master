@@ -28,7 +28,7 @@
         <div class="checkout__details-tickets">
           <div
             class="checkout__details-tickets-item"
-            v-for="(ticket, index) in newTickets"
+            v-for="(ticket, index) in tickets"
             :key="index"
           >
             <p class="checkout__details-tickets-item-type">{{ ticket.name }}</p>
@@ -76,7 +76,7 @@
           <div class="checkout__summary-ticket-info-wrapper">
             <div
               class="checkout__summary-ticket-info"
-              v-for="(ticket, index) in newTickets"
+              v-for="(ticket,index) in tickets"
               :key="index"
             >
               <p class="ticket-name">{{ ticket.count }} - {{ ticket.name }}</p>
@@ -142,15 +142,14 @@ export default {
     return {
       currentTabComponent: '',
       vat: 1000,
-      event: {},
-      newTickets: ''
+      event: {}
     }
   },
   computed: {
     ...mapGetters(['tickets', 'events']),
     subtotal: function () {
       let total = 0
-      this.newTickets.forEach(t => {
+      this.tickets.forEach(t => {
         total = total + t.count * t.price
       })
       return total
@@ -164,11 +163,9 @@ export default {
     ...mapActions(['incrementTicket', 'decrementTicket', 'setTickets']),
     increment: function (e) {
       this.incrementTicket(e)
-      this.newTickets = this.event.tickets
     },
     decrement: function (e) {
       this.decrementTicket(e)
-      this.newTickets = this.event.tickets
     }
   },
   watch: {
@@ -178,13 +175,13 @@ export default {
     const id = this.$route.params.id
     const event = this.events.find(e => parseInt(e.id) === parseInt(id))
     this.setTickets(event.tickets)
-    this.event = event
+    this.event = { ...event }
   },
   mounted () {
-    this.newTickets = this.event.tickets
+
   },
   updated () {
-    this.newTickets = this.tickets
+
   }
 }
 </script>
