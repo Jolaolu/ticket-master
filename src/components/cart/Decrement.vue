@@ -9,4 +9,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.counter {
+  box-sizing: border-box;
+  padding:0;
+  -webkit-appearance: none;
+}
 </style>
